@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.master')
 
 @section('body')
 
@@ -18,13 +18,13 @@
                                 <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                                 <div class="col-lg-6">
                                     <div class="p-5">
-                                        @if (session('error'))
-                                            <div class="alert alert-danger">
-                                                <b>Opps!</b> {{ session('error') }}
-                                            </div>
-                                        @endif
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                            @if (session('error'))
+                                                <div class="alert alert-danger">
+                                                    <b>Opps!</b> {{ session('error') }}
+                                                </div>
+                                            @endif
                                         </div>
                                         <form action="{{ route('actionLogin') }}" class="user" method="POST">
                                             @csrf
@@ -59,7 +59,7 @@
                                         </form>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                            <a class="small" href="/forgot-password">Forgot Password?</a>
                                         </div>
                                         <div class="text-center">
                                             <a class="small" href="{{ route('register') }}">Create an Account!</a>

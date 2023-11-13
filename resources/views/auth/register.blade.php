@@ -1,4 +1,4 @@
-@extends('layouts.main');
+@extends('layouts.master');
 
 @section('body')
 
@@ -12,51 +12,67 @@
                         <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
+                                @if (session('message'))
+                                    <div class="alert alert-success">
+                                        {{ session('message') }}
+                                    </div>
+                                @endif
+
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                                 </div>
-                                <form class="user">
+                                <form action="{{ route('actionRegister') }}" class="user" method="POST">
+                                    @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="exampleFirstName" placeholder="First Name">
+                                            <input type="text" name="firstName" class="form-control form-control-user"
+                                                id="exampleFirstName" placeholder="First Name" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="exampleLastName" placeholder="Last Name">
+                                            <input type="text" name="lastName" class="form-control form-control-user"
+                                                id="exampleLastName" placeholder="Last Name" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                            placeholder="Email Address">
+                                        <input type="email" name="email" class="form-control form-control-user"
+                                            id="exampleInputEmail" placeholder="Email Address" required>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                            <input type="password" name="password" class="form-control form-control-user"
+                                                id="exampleInputPassword" placeholder="Password" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleRepeatPassword" placeholder="Repeat Password">
+                                            <input type="password" name="repeatPassword"
+                                                class="form-control form-control-user" id="exampleRepeatPassword"
+                                                placeholder="Repeat Password" required>
                                         </div>
                                     </div>
-                                    <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            <b>Opps!</b> {{ session('error') }}
+                                        </div>
+                                    @endif
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">Register
+                                        Account</button>
+
+                                    {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
                                         Register Account
                                     </a>
-                                    <hr>
-                                    <a href="index.html" class="btn btn-google btn-user btn-block">
+                                    <hr> --}}
+                                    {{-- <a href="index.html" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> Register with Google
                                     </a>
                                     <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                         <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                    </a>
+                                    </a> --}}
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    <a class="small" href="{{ route('forgot-password') }}">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="login.html">Already have an account? Login!</a>
+                                    <a class="small" href="{{ route('login') }}">Already have an account? Login!</a>
                                 </div>
                             </div>
                         </div>
@@ -67,14 +83,14 @@
         </div>
 
         <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+        <script src="/js/sb-admin-2.min.js"></script>
 
     </body>
 @endsection
