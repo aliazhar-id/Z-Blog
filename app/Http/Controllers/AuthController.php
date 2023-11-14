@@ -55,28 +55,34 @@ class AuthController extends Controller
       return redirect('dashboard');
     }
 
+    $validatedData = $request->validate([
+      'firstName' => 'required|string',
+      'lastName' => 'required|string',
+      'password' => 'required|string|min:6|confirmed',
+      'email' => 'required|email|unique:users',
+    ], [
+      'required' => ':attribute tidak boleh kosong.',
+      'email' => 'Format :attribute tidak valid.',
+      'unique' => ':attribute ini sudah didaftarkan, silahkan login.',
+      'min' => ':attribute minimal :min karakter.',
+      'confirmed' => 'Password yang anda masukkan tidak sama.',
+    ]);
+
     $data = [
-      'firstName' => $request->firstName,
-      'lastName' => $request->lastName,
-      'email' => $request->email,
-      'password' => $request->password,
-      'repeatPassword' => $request->repeatPassword,
+      'firstName' => $validatedData['firstName'],
+      'lastName' => $validatedData['lastName'],
+      'email' => $validatedData['email'],
+      'password' => bcrypt($validatedData['password']),
     ];
 
-    if ($data['password'] !== $data['repeatPassword']) {
-      Session::flash('error', 'Password yang anda masukkan tidak sama!');
+    try {
+      $user = User::create($data);
+      Session::flash('message', 'Register Berhasil. Silahkan Login menggunakan email dan password.');
+      return redirect('register');
+    } catch (\Exception $e) {
+      Session::flash('error', 'Gagal mendaftarkan pengguna. Silahkan coba lagi.');
       return back()->withInput();
     }
-
-    if (User::where('email', $data['email'])->first()) {
-      Session::flash('error', 'Email ini sudah didaftarkan, silahkan login!');
-      return back()->withInput();
-    }
-
-    $user = User::create($data);
-
-    Session::flash('message', 'Register Berhasil. Silahkan Login menggunakan email dan password.');
-    return redirect('register');
   }
 
   public function forgotPassword()

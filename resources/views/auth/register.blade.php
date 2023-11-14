@@ -46,7 +46,7 @@
                                                 id="exampleInputPassword" placeholder="Password" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="password" name="repeatPassword"
+                                            <input type="password" name="password_confirmation"
                                                 class="form-control form-control-user" id="exampleRepeatPassword"
                                                 placeholder="Repeat Password" required>
                                         </div>
@@ -55,7 +55,12 @@
                                         <div class="alert alert-danger">
                                             <b>Opps!</b> {{ session('error') }}
                                         </div>
+                                    @elseif ($errors->any())
+                                        <div class="alert alert-danger">
+                                            {{ $errors->first() }}
+                                        </div>
                                     @endif
+
                                     <button type="submit" class="btn btn-primary btn-user btn-block">Register
                                         Account</button>
 
