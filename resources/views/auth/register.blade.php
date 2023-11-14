@@ -25,17 +25,20 @@
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" name="firstName" class="form-control form-control-user"
-                                                id="exampleFirstName" placeholder="First Name" required>
+                                            <input type="text" name="firstName" value="{{ old('firstName') }}"
+                                                class="form-control form-control-user" id="exampleFirstName"
+                                                placeholder="First Name" required>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" name="lastName" class="form-control form-control-user"
-                                                id="exampleLastName" placeholder="Last Name" required>
+                                            <input type="text" name="lastName" value="{{ old('lastName') }}"
+                                                class="form-control form-control-user" id="exampleLastName"
+                                                placeholder="Last Name" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" class="form-control form-control-user"
-                                            id="exampleInputEmail" placeholder="Email Address" required>
+                                        <input type="email" name="email" value="{{ old('email') }}"
+                                            class="form-control form-control-user" id="exampleInputEmail"
+                                            placeholder="Email Address" required>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">

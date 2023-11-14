@@ -65,12 +65,12 @@ class AuthController extends Controller
 
     if ($data['password'] !== $data['repeatPassword']) {
       Session::flash('error', 'Password yang anda masukkan tidak sama!');
-      return redirect('register');
+      return back()->withInput();
     }
 
     if (User::where('email', $data['email'])->first()) {
       Session::flash('error', 'Email ini sudah didaftarkan, silahkan login!');
-      return redirect('register');
+      return back()->withInput();
     }
 
     $user = User::create($data);
