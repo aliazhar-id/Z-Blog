@@ -47,5 +47,6 @@
     <!-- Page level plugins -->
     <script src="/vendor/chart.js/Chart.min.js"></script>
 
+    @yield('custom-script')
   </body>
 @endsection
