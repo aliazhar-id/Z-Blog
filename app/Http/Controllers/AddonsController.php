@@ -17,7 +17,10 @@ class AddonsController extends Controller
 
 
         if (View::exists($view)) {
-            return view($view, ['title' => 'Buttons']);
+            return view($view, [
+                'title' => 'Buttons',
+                'active' => $pages
+            ]);
         } else {
             abort(404);
         }

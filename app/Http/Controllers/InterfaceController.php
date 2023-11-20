@@ -12,7 +12,10 @@ class InterfaceController extends Controller
         $view = "interfaces.$groups.$interface";
 
         if (View::exists($view)) {
-            return view($view, ['title' => 'Buttons']);
+            return view($view, [
+                'title' => 'Buttons',
+                'active' => $groups
+            ]);
         } else {
             abort(404);
         }
