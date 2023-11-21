@@ -73,11 +73,11 @@ class AuthController extends Controller
     $validatedData['password'] = Hash::make($validatedData['password']);
 
     try {
-      $user = User::create($data);
-      Session::flash('message', 'Register Berhasil. Silahkan Login menggunakan email dan password.');
-      return redirect('register');
+      $user = User::create($validatedData);
+      Session::flash('success', 'Register Berhasil. Silahkan login menggunakan email dan password.');
+      return redirect('/login');
     } catch (\Exception $e) {
-      Session::flash('error', 'Gagal mendaftarkan pengguna. Silahkan coba lagi.');
+      Session::flash('error', 'Register Gagal. Silahkan coba lagi :)');
       return back()->withInput();
     }
   }

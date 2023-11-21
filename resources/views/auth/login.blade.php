@@ -19,12 +19,16 @@
                 <div class="col-lg-6">
                   <div class="p-5">
                     <div class="text-center">
-                      <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                      @if (session('error'))
+                      @if (session('success'))
+                        <div class="alert alert-success">
+                          {{ session('success') }}
+                        </div>
+                      @elseif (session('error'))
                         <div class="alert alert-danger">
                           <b>Opps!</b> {{ session('error') }}
                         </div>
                       @endif
+                      <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                     </div>
                     <form action="{{ route('actionLogin') }}" class="user" method="POST">
                       @csrf
