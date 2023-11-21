@@ -21,15 +21,15 @@ class AuthController extends Controller
 
   public function actionlogin(Request $request)
   {
-    $data = [
-      'email' => $request->input('email'),
-      'password' => $request->input('password'),
-    ];
+    $validatedData = $request->validate([
+      'password' => 'required|string|max:50',
+      'email' => 'required|email:dns|max:30',
+    ]);
 
-    if (Auth::Attempt($data)) {
+    if (Auth::Attempt($validatedData)) {
       return redirect('dashboard');
     } else {
-      Session::flash('error', 'Email atau Password Salah');
+      Session::flash('error', 'Email atau password salah');
       return redirect('/');
     }
   }

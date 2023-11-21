@@ -33,12 +33,26 @@
                     <form action="{{ route('actionLogin') }}" class="user" method="POST">
                       @csrf
                       <div class="form-group">
-                        <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail"
-                          aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                        <input type="email" name="email"
+                          class="form-control form-control-user @error('email') is-invalid @enderror"
+                          id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+
+                        @error('email')
+                          <div class="invalid-feedback pl-2">
+                            {{ $message }}
+                          </div>
+                        @enderror
                       </div>
                       <div class="form-group">
-                        <input type="password" name="password" class="form-control form-control-user"
+                        <input type="password" name="password"
+                          class="form-control form-control-user @error('password') is-invalid @enderror"
                           id="exampleInputPassword" placeholder="Password">
+
+                        @error('password')
+                          <div class="invalid-feedback pl-2">
+                            {{ $message }}
+                          </div>
+                        @enderror
                       </div>
                       <div class="form-group">
                         <div class="custom-control custom-checkbox small">
@@ -48,16 +62,13 @@
                         </div>
                       </div>
                       <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
-                      {{-- <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                          Login
-                                      </a> --}}
-                      {{-- <hr> --}}
-                      {{-- <a href="index.html" class="btn btn-google btn-user btn-block">
-                                          <i class="fab fa-google fa-fw"></i> Login with Google
-                                      </a>
-                                      <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                          <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                      </a> --}}
+                      <hr>
+                      <a href="" class="btn btn-google btn-user btn-block">
+                        <i class="fab fa-google fa-fw"></i> Login with Google
+                      </a>
+                      <a href="" class="btn btn-facebook btn-user btn-block">
+                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                      </a>
                     </form>
                     <hr>
                     <div class="text-center">
