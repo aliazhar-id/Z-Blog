@@ -20,39 +20,63 @@
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                       <input type="text" name="firstName" value="{{ old('firstName') }}"
-                        class="form-control form-control-user" id="exampleFirstName" placeholder="First Name" required>
+                        class="form-control form-control-user @error('firstName') is-invalid @enderror"
+                        id="exampleFirstName" placeholder="First Name">
+
+                      @error('firstName')
+                        <div class="invalid-feedback pl-2">
+                          {{ $message }}
+                        </div>
+                      @enderror
                     </div>
                     <div class="col-sm-6">
                       <input type="text" name="lastName" value="{{ old('lastName') }}"
-                        class="form-control form-control-user" id="exampleLastName" placeholder="Last Name" required>
+                        class="form-control form-control-user @error('lastName') is-invalid @enderror"
+                        id="exampleLastName" placeholder="Last Name">
+
+                      @error('lastName')
+                        <div class="invalid-feedback pl-2">
+                          {{ $message }}
+                        </div>
+                      @enderror
                     </div>
                   </div>
                   <div class="form-group">
                     <input type="email" name="email" value="{{ old('email') }}"
-                      class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address" required>
+                      class="form-control form-control-user @error('email') is-invalid @enderror" id="exampleInputEmail"
+                      placeholder="Email Address">
+
+                    @error('email')
+                      <div class="invalid-feedback pl-2">
+                        {{ $message }}
+                      </div>
+                    @enderror
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="password" name="password" class="form-control form-control-user"
-                        id="exampleInputPassword" placeholder="Password" required>
+                      <input type="password" name="password"
+                        class="form-control form-control-user @error('password') is-invalid @enderror"
+                        id="exampleInputPassword" placeholder="Password">
+
+                      @error('password')
+                        <div class="invalid-feedback pl-2">
+                          {{ $message }}
+                        </div>
+                      @enderror
                     </div>
                     <div class="col-sm-6">
                       <input type="password" name="password_confirmation" class="form-control form-control-user"
-                        id="exampleRepeatPassword" placeholder="Repeat Password" required>
+                        id="exampleRepeatPassword" placeholder="Repeat Password">
                     </div>
                   </div>
+
                   @if (session('error'))
                     <div class="alert alert-danger">
                       <b>Opps!</b> {{ session('error') }}
                     </div>
-                  @elseif ($errors->any())
-                    <div class="alert alert-danger">
-                      {{ $errors->first() }}
-                    </div>
                   @endif
 
-                  <button type="submit" class="btn btn-primary btn-user btn-block">Register
-                    Account</button>
+                  <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
 
                   {{-- <a href="login.html" class="btn btn-primary btn-user btn-block">
                                         Register Account
