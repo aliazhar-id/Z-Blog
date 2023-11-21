@@ -13,6 +13,7 @@
             <div class="col-lg-7">
               <div class="p-5">
                 <div class="text-center">
+                  @yield('custom-alert')
                   <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                 </div>
                 <form action="{{ route('actionRegister') }}" class="user" method="POST">
