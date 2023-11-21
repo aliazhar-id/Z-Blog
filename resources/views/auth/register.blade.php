@@ -65,8 +65,15 @@
                       @enderror
                     </div>
                     <div class="col-sm-6">
-                      <input type="password" name="password_confirmation" class="form-control form-control-user"
+                      <input type="password" name="password_confirmation"
+                        class="form-control form-control-user @error('password_confirmation') is-invalid @enderror"
                         id="exampleRepeatPassword" placeholder="Repeat Password">
+
+                      @error('password_confirmation')
+                        <div class="invalid-feedback pl-2">
+                          {{ $message }}
+                        </div>
+                      @enderror
                     </div>
                   </div>
 
