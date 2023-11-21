@@ -55,25 +55,22 @@ class AuthController extends Controller
       return redirect('dashboard');
     }
 
+    // $errorMessage = [
+    //   'required' => ':Attribute tidak boleh kosong.',
+    //   'email' => 'Format :Attribute tidak valid.',
+    //   'unique' => ':Attribute ini sudah didaftarkan, silahkan login.',
+    //   'min' => ':Attribute minimal :min karakter.',
+    //   'confirmed' => 'Konfirmasi password tidak sama.',
+    // ];
+
     $validatedData = $request->validate([
-      'firstName' => 'required|string',
-      'lastName' => 'required|string',
+      'firstName' => 'required|string|min:3|max:100',
+      'lastName' => 'required|string|min:3|max:100',
       'password' => 'required|string|min:6|confirmed',
-      'email' => 'required|email|unique:users',
-    ], [
-      'required' => ':attribute tidak boleh kosong.',
-      'email' => 'Format :attribute tidak valid.',
-      'unique' => ':attribute ini sudah didaftarkan, silahkan login.',
-      'min' => ':attribute minimal :min karakter.',
-      'confirmed' => 'Password yang anda masukkan tidak sama.',
+      'email' => 'required|email:dns|unique:users|max:30',
     ]);
 
-    $data = [
-      'firstName' => $validatedData['firstName'],
-      'lastName' => $validatedData['lastName'],
-      'email' => $validatedData['email'],
-      'password' => bcrypt($validatedData['password']),
-    ];
+    $validatedData['password'] = Hash::make($validatedData['password']);
 
     try {
       $user = User::create($data);
