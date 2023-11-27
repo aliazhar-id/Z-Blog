@@ -13,13 +13,13 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item {{ $active == 'dashboard' ? 'active' : '' }}">
+  <li class="nav-item  {{ Request::is('dashboard') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('dashboard') }}">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
 
-  <!-- Divider -->
+  {{-- <!-- Divider -->
   <hr class="sidebar-divider">
 
   <!-- Heading -->
@@ -102,6 +102,28 @@
     <a class="nav-link" href="/addons/tables">
       <i class="fas fa-fw fa-table"></i>
       <span>Tables</span></a>
+  </li> --}}
+
+  <hr class="sidebar-divider">
+
+  <!-- Nav Item - Profile -->
+  <li class="nav-item {{ Request::is('products') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('products') }}">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Product</span></a>
+  </li>
+
+  <hr class="sidebar-divider">
+
+  <div class="sidebar-heading">
+    Settings
+  </div>
+
+  <!-- Nav Item - Profile -->
+  <li class="nav-item {{ Request::is('profile') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('profile') }}">
+      <i class="fas fa-fw fa-user"></i>
+      <span>Profile</span></a>
   </li>
 
   <!-- Divider -->
@@ -113,14 +135,14 @@
   </div>
 
   <!-- Sidebar Message -->
-  <div class="sidebar-card d-none d-lg-flex">
+  {{-- <div class="sidebar-card d-none d-lg-flex">
     <img class="sidebar-card-illustration mb-2" src="/img/undraw_rocket.svg" alt="...">
     <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features,
       components,
       and more!</p>
     <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
       Pro!</a>
-  </div>
+  </div> --}}
 
 </ul>
 <!-- End of Sidebar -->

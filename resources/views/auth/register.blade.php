@@ -20,22 +20,22 @@
                   @csrf
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="text" name="firstName" value="{{ old('firstName') }}"
-                        class="form-control form-control-user @error('firstName') is-invalid @enderror"
+                      <input type="text" name="first_name" value="{{ old('first_name') }}"
+                        class="form-control form-control-user @error('first_name') is-invalid @enderror"
                         id="exampleFirstName" placeholder="First Name">
 
-                      @error('firstName')
+                      @error('first_name')
                         <div class="invalid-feedback pl-2">
                           {{ $message }}
                         </div>
                       @enderror
                     </div>
                     <div class="col-sm-6">
-                      <input type="text" name="lastName" value="{{ old('lastName') }}"
-                        class="form-control form-control-user @error('lastName') is-invalid @enderror"
+                      <input type="text" name="last_name" value="{{ old('last_name') }}"
+                        class="form-control form-control-user @error('last_name') is-invalid @enderror"
                         id="exampleLastName" placeholder="Last Name">
 
-                      @error('lastName')
+                      @error('last_name')
                         <div class="invalid-feedback pl-2">
                           {{ $message }}
                         </div>

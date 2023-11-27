@@ -10,7 +10,13 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'title' => 'Dashboard',
-            'active' => 'dashboard'
+        ]);
+    }
+
+    function show()
+    {
+        return view('products', [
+            'title' => 'Products',
         ]);
     }
 }

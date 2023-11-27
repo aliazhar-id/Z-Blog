@@ -29,5 +29,11 @@ Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name(
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
+Route::get('/products', [DashboardController::class, 'show'])->name('products')->middleware('auth');
+
 Route::get('/interfaces/{groups}/{interface}', [InterfaceController::class, 'index'])->middleware('auth');
 Route::get('/addons/{pages}/{addon?}', [AddonsController::class, 'index'])->middleware('auth');
+
+Route::get('/profile', function () {
+  return view('profile', ['active' => 'profile', 'title' => 'Profile']);
+})->name('profile')->middleware('auth');
