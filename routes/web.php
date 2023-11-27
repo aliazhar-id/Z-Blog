@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('blog.page.posts');
+    return view('blog.page.posts', ['title' => 'Post']);
 });

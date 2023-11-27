@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="Z Blog is Blog :)" />
   <meta name="author" content="Ali Azhar" />
-  <title>Blog Home - Start Bootstrap Template</title>
+  <title>Z-Blog | {{ $title }}</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
   <!-- Core theme CSS (includes Bootstrap)-->
@@ -26,7 +26,7 @@
 
   <!-- Footer-->
   @include('blog.partials.footer')
-  
+
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
