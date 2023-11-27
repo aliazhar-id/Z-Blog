@@ -20,6 +20,12 @@ Route::get('/', function () {
   ]);
 })->name('home');
 
+Route::get('/about', function () {
+  return view('blog.page.about', [
+    'title' => 'About'
+  ]);
+})->name('about');
+
 Route::get('/posts', [PostController::class, 'index'])->name('blog');
 
 Route::get('/posts/{post}', [PostController::class, 'show']);
