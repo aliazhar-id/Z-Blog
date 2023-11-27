@@ -16,7 +16,7 @@
             <div class="small text-muted">{{ $posts[0]->created_at->diffForHumans() }}</div>
             <h2 class="card-title">{{ $posts[0]->title }}</h2>
             <p class="card-text">{{ $posts[0]->excerpt }}</p>
-            <a class="btn btn-primary" href="#!">Read more →</a>
+            <a class="btn btn-primary" href="/posts/{{ $posts[0]->slug }}">Read more →</a>
           </div>
         </div>
       @endif
@@ -32,7 +32,7 @@
                 <div class="small text-muted">{{ $post->created_at->diffForHumans() }}</div>
                 <h2 class="card-title h4">{{ $post->title }}</h2>
                 <p class="card-text">{{ $post->excerpt }}</p>
-                <a class="btn btn-primary" href="#!">Read more →</a>
+                <a class="btn btn-primary" href="/posts/{{ $post->slug }}">Read more →</a>
               </div>
             </div>
           </div>

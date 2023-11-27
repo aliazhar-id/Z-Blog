@@ -21,3 +21,5 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/posts', [PostController::class, 'index'])->name('blog');
+
+Route::get('/posts/{post}', [PostController::class, 'show']);
