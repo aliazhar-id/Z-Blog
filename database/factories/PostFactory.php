@@ -49,6 +49,7 @@ class PostFactory extends Factory
       'body' => collect(fake()->paragraphs(mt_rand(6, 15)))
         ->map(fn ($p) => "<p>$p</p>")
         ->implode(''),
+      'image' => 'https://source.unsplash.com/700x350',
       'published_at' => self::generateRandomDateTime(),
       'id_user' => mt_rand(1, 5),
       'id_category' => mt_rand(1, 5)
