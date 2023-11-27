@@ -11,6 +11,7 @@ class Category extends Model
     use HasFactory;
 
     protected $guarded = ['id_category'];
+    protected $primaryKey = 'id_category';
   
     public function posts()
     {
