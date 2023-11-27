@@ -7,92 +7,43 @@
 @section('content')
   <div class="row">
     <!-- Blog entries-->
-    <div class="col-lg-8">
+    <div class="col-lg-9">
       <!-- Featured blog post-->
-      <div class="card mb-4">
-        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
-            alt="..." /></a>
-        <div class="card-body">
-          <div class="small text-muted">January 1, 2023</div>
-          <h2 class="card-title">Featured Post Title</h2>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
-            nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus
-            possimus, veniam magni quis!</p>
-          <a class="btn btn-primary" href="#!">Read more →</a>
+      @if ($posts->count())
+        <div class="card mb-4">
+          <a href="#!"><img class="card-img-top" src="{{ $posts[0]->image }}" alt="..." /></a>
+          <div class="card-body">
+            <div class="small text-muted">{{ $posts[0]->created_at->diffForHumans() }}</div>
+            <h2 class="card-title">{{ $posts[0]->title }}</h2>
+            <p class="card-text">{{ $posts[0]->excerpt }}</p>
+            <a class="btn btn-primary" href="#!">Read more →</a>
+          </div>
         </div>
-      </div>
+      @endif
+
       <!-- Nested row for non-featured blog posts-->
       <div class="row">
-        <div class="col-lg-6">
-          <!-- Blog post-->
-          <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                alt="..." /></a>
-            <div class="card-body">
-              <div class="small text-muted">January 1, 2023</div>
-              <h2 class="card-title h4">Post Title</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
-                nulla.</p>
-              <a class="btn btn-primary" href="#!">Read more →</a>
+        @foreach ($posts as $post)
+          <div class="col-lg-4">
+            <!-- Blog post-->
+            <div class="card mb-4">
+              <a href="#!"><img class="card-img-top" src="{{ $post->image }}" alt="..." /></a>
+              <div class="card-body">
+                <div class="small text-muted">{{ $post->created_at->diffForHumans() }}</div>
+                <h2 class="card-title h4">{{ $post->title }}</h2>
+                <p class="card-text">{{ $post->excerpt }}</p>
+                <a class="btn btn-primary" href="#!">Read more →</a>
+              </div>
             </div>
           </div>
-          <!-- Blog post-->
-          <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                alt="..." /></a>
-            <div class="card-body">
-              <div class="small text-muted">January 1, 2023</div>
-              <h2 class="card-title h4">Post Title</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
-                nulla.</p>
-              <a class="btn btn-primary" href="#!">Read more →</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <!-- Blog post-->
-          <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                alt="..." /></a>
-            <div class="card-body">
-              <div class="small text-muted">January 1, 2023</div>
-              <h2 class="card-title h4">Post Title</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
-                nulla.</p>
-              <a class="btn btn-primary" href="#!">Read more →</a>
-            </div>
-          </div>
-          <!-- Blog post-->
-          <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
-                alt="..." /></a>
-            <div class="card-body">
-              <div class="small text-muted">January 1, 2023</div>
-              <h2 class="card-title h4">Post Title</h2>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
-                nulla? Quos cum ex quis soluta, a laboriosam.</p>
-              <a class="btn btn-primary" href="#!">Read more →</a>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
+
       <!-- Pagination-->
-      <nav aria-label="Pagination">
-        <hr class="my-0" />
-        <ul class="pagination justify-content-center my-4">
-          <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-          </li>
-          <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-          <li class="page-item"><a class="page-link" href="#!">2</a></li>
-          <li class="page-item"><a class="page-link" href="#!">3</a></li>
-          <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-          <li class="page-item"><a class="page-link" href="#!">15</a></li>
-          <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-        </ul>
-      </nav>
+      <div class="d-flex justify-content-center">{{ $posts->links() }}</div>
     </div>
     <!-- Side widgets-->
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <!-- Search widget-->
       <div class="card mb-4">
         <div class="card-header">Search</div>
@@ -109,20 +60,17 @@
         <div class="card-header">Categories</div>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#!">Web Design</a></li>
-                <li><a href="#!">HTML</a></li>
-                <li><a href="#!">Freebies</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#!">JavaScript</a></li>
-                <li><a href="#!">CSS</a></li>
-                <li><a href="#!">Tutorials</a></li>
-              </ul>
-            </div>
+
+            @foreach ($categories->chunk(ceil($categories->count() / 2)) as $group)
+              <div class="col-sm-6">
+                <ul class="list-unstyled mb-0">
+                  @foreach ($group as $category)
+                    <li><a href="#!">{{ $category->name }}</a></li>
+                  @endforeach
+                </ul>
+              </div>
+            @endforeach
+
           </div>
         </div>
       </div>
