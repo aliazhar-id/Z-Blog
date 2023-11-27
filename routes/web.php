@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,7 @@ Route::get('/about', function () {
 Route::get('/posts', [PostController::class, 'index'])->name('blog');
 
 Route::get('/posts/{post}', [PostController::class, 'show']);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('actionLogin');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

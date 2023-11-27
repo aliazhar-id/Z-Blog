@@ -28,6 +28,12 @@
  border-bottom: 0.3em solid;
 }
 
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
 /*
 * Start Bootstrap - Blog Home v5.0.9 (https://startbootstrap.com/template/blog-home)
 * Copyright 2013-2023 Start Bootstrap

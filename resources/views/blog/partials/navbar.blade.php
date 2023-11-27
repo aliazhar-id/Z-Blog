@@ -19,14 +19,42 @@
             href="#">About</a>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
-        <li class="nav-item">
-          <a href="{{ route('login') }}"
-            class="nav-link btn btn-secondary lh-base{{ Request::is('login') ? 'about' : '' }}">
-            <i class="bi bi-box-arrow-in-right"></i> Login
-          </a>
-        </li>
 
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
+        @auth
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="mx-2">{{ auth()->user()->name }}</span>
+              <div class="profile-pic">
+                <img src="{{ isset(auth()->user()->image) ? auth()->user()->image : '/assets/guest.jpeg' }}"
+                  alt="Profile Picture">
+              </div>
+
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-person-gear"></i></i> Account</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <form action="{{ route('logout') }}" method="POST">
+                  @csrf
+                  <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Log Out</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        @else
+          <li class="nav-item">
+            <a href="{{ route('login') }}"
+              class="nav-link btn btn-secondary lh-base{{ Request::is('login') ? 'about' : '' }}">
+              <i class="bi bi-box-arrow-in-right"></i> Log In
+            </a>
+          </li>
+        @endauth
       </ul>
     </div>
   </div>
