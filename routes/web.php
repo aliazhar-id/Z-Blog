@@ -28,7 +28,7 @@ Route::get('/about', function () {
   ]);
 })->name('about');
 
-Route::get('/posts', [PostController::class, 'index'])->name('blog');
+Route::get('/posts', [PostController::class, 'index'])->name('blogs');
 
 Route::get('/posts/{post}', [PostController::class, 'show']);
 
