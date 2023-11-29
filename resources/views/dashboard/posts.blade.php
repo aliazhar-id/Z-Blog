@@ -21,6 +21,10 @@
     </form>
   </div>
 
+  <div class="col-lg-12">
+    <a href="/dashboard/posts/create" class="btn btn-primary mb-3 mx-">Create new Post</a>
+  </div>
+
   @if ($posts->count())
     <div class="table-responsive col-lg-12">
       <table class="table table-striped table-sm">
