@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row justify-content-center mb-5">
-      <div class="col-md-8 mt-5">
+      <div class="col-md-8 mt-4">
         <h1 class="mb-3">{{ $post->title }}</h1>
         <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" class="img-fluid"
           alt="{{ $post->category->name }}">
