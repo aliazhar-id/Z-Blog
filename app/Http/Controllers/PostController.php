@@ -10,8 +10,6 @@ class PostController extends Controller
 {
   public function index()
   {
-
-    // return Category::all();
     return view('blog.page.posts', [
       'title' => 'Post',
       'posts' => Post::latest()->paginate(12)->withQueryString(),
