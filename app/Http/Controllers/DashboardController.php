@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardController extends Controller
 {
@@ -37,7 +41,10 @@ class DashboardController extends Controller
    */
   public function create()
   {
-    //
+    return view('dashboard.create', [
+      'title' => 'Create',
+      'categories' => Category::all()
+    ]);
   }
 
   /**
@@ -45,7 +52,29 @@ class DashboardController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $customError = [
+      'title.unique' => 'There is already a post with this title on your blog.'
+    ];
+
+    $validatedData = $request->validate([
+      'title' => [
+        'required',
+        'min:3',
+        'max:255',
+        Rule::unique('posts')->where(fn ($query) => $query->where('title', request()->title)->where('id_user', auth()->user()->id_user))
+      ],
+      'id_category' => 'required',
+      'body' => 'required'
+    ], $customError);
+
+    $validatedData['id_user'] = auth()->user()->id_user;
+    $validatedData['slug'] = SlugService::createSlug(Post::class, 'slug', $validatedData['title']);
+    $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 150, '...');
+    $validatedData['image'] = 'https://source.unsplash.com/1200x400';
+
+    Post::create($validatedData);
+
+    return redirect('/dashboard/posts');
   }
 
   /**
@@ -53,7 +82,7 @@ class DashboardController extends Controller
    */
   public function show(Post $post)
   {
-    return view('dashboard.post', [
+    return view('dashboard.read', [
       'title' => 'Post',
       'post' => $post
     ]);
