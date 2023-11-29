@@ -25,15 +25,13 @@
           <div class="row gy-3 overflow-hidden">
             <div class="col-12">
               <div class="form-floating">
-                <input type="email" class="form-control rounded-4" name="email" id="email" placeholder=""
-                  required>
+                <input type="email" class="form-control rounded-4" name="email" value="{{ old('email') }}" id="email" placeholder="" autofocus required>
                 <label for="email" class="form-label">Email</label>
               </div>
             </div>
             <div class="col-12">
               <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-4" name="password" id="password" value=""
-                  placeholder="" required>
+                <input type="password" class="form-control rounded-4" name="password" id="password" placeholder="" required>
                 <label for="password" class="form-label">Password</label>
               </div>
             </div>
