@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +45,6 @@ Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashb
 
 Route::resource('/dashboard/posts', DashboardController::class)->middleware('auth');
 
-Route::get('/profile', [DashboardController::class, 'profile'])->name('profile')->middleware('auth');
+Route::resource('/profile', UserController::class)->parameters([
+  'profile' => 'user'
+])->only(['index', 'update'])->middleware('auth');
