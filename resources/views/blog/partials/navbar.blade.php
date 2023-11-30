@@ -37,7 +37,7 @@
                 <a class="dropdown-item" href="{{ route('dashboard') }}"><i class="bi bi-card-list"></i> Dashboard</a>
               </li>
               <li>
-                <a class="dropdown-item" href="{{ route('profile') }}"><i class="bi bi-person-gear"></i></i> Account</a>
+                <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="bi bi-person-gear"></i></i> Account</a>
               </li>
               <li>
                 <hr class="dropdown-divider">

@@ -37,7 +37,7 @@
   <!-- Nav Item - Add Post -->
   <li class="nav-item {{ Request::is('dashboard/posts/create') ? 'active' : '' }}">
     <a class="nav-link pt-0" href="/dashboard/posts/create">
-      <i class="far fa-file-alt"></i>
+      <i class="far fa-file"></i>
       <span>Add Post</span></a>
   </li>
 
@@ -48,8 +48,8 @@
 
   <!-- Nav Item - Profile -->
   <li class="nav-item {{ Request::is('profile') ? 'active' : '' }}">
-    <a class="nav-link" href="/profile">
-      <i class="fas fa-fw fa-user"></i>
+    <a class="nav-link" href="{{ route('profile.index') }}">
+      <i class="fas fa-user-edit"></i>
       <span>Profile</span></a>
   </li>
 
