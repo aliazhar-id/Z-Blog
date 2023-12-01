@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 
@@ -18,33 +19,23 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-  return view('blog.page.home', [
-    'title' => 'Home'
-  ]);
-})->name('home');
+// MAIN
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/posts', [PageController::class, 'blog'])->name('blogs');
+Route::get('/posts/{post}', [PageController::class, 'read']);
+Route::get('/trends', [PageController::class, 'trends'])->name('trends');
 
-Route::get('/about', function () {
-  return view('blog.page.about', [
-    'title' => 'About'
-  ]);
-})->name('about');
-
-Route::get('/posts', [PostController::class, 'index'])->name('blogs');
-
-Route::get('/posts/{post}', [PostController::class, 'show']);
-
+// LOGIN
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('actionLogin')->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+// REGISTER
 Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'register'])->name('actionRegister')->middleware('guest');
 
+// DASHBOARD
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-
 Route::resource('/dashboard/posts', DashboardController::class)->middleware('auth');
-
-Route::resource('/profile', UserController::class)->parameters([
-  'profile' => 'user'
-])->only(['index', 'update'])->middleware('auth');
+Route::resource('/profile', UserController::class)->parameters(['profile' => 'user'])->only(['index', 'update'])->middleware('auth');

@@ -11,12 +11,13 @@
           <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('posts*') ? 'active' : '' }}" href="{{ route('blogs') }}"
-            href="#">Blog</a>
+          <a class="nav-link {{ Request::is('posts*') ? 'active' : '' }}" href="{{ route('blogs') }}">Blog</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('posts*') ? 'about' : '' }}" href="{{ route('about') }}"
-            href="#">About</a>
+          <a class="nav-link {{ Request::is('trends') ? 'active' : '' }}" href="{{ route('trends') }}">Trends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ Request::is('posts*') ? 'about' : '' }}" href="{{ route('about') }}">About</a>
         </li>
       </ul>
 
@@ -37,7 +38,8 @@
                 <a class="dropdown-item" href="{{ route('dashboard') }}"><i class="bi bi-card-list"></i> Dashboard</a>
               </li>
               <li>
-                <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="bi bi-person-gear"></i></i> Account</a>
+                <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="bi bi-person-gear"></i></i>
+                  Account</a>
               </li>
               <li>
                 <hr class="dropdown-divider">
