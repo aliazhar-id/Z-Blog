@@ -19,6 +19,8 @@ class PostController extends Controller
 
   public function show(Post $post)
   {
+    Post::withoutTimestamps(fn () => $post->increment('click'));
+
     return view('blog.page.post', [
       'title' => 'Post',
       'post' => $post

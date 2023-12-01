@@ -11,28 +11,55 @@
       <!-- Featured blog post-->
       @if ($posts->count())
         <div class="card mb-4">
-          <a href="#!"><img class="card-img-top" src="{{ $posts[0]->image }}" alt="..." /></a>
+          <a href="/posts/{{ $posts[0]->slug }}"><img class="card-img-top" src="{{ $posts[0]->image }}" alt="..." /></a>
           <div class="card-body">
-            <div class="small text-muted">{{ $posts[0]->created_at->diffForHumans() }}</div>
+            <div class="container d-flex mb-2 px-0 align-items-center">
+              <div class="profile-pic me-1" style="height: 50px; width:50px">
+                <img src="{{ isset($posts[0]->author->image) ? $posts[0]->author->image : '/assets/guest.jpeg' }}"
+                  alt="Profile Picture">
+              </div>
+              <div>
+                <small class="text-muted text-break">{{ $posts[0]->author->name }}</small class="text-muted">
+                <div class="text-muted small text-break d-block">{{ $posts[0]->category->name }}</div class="text-muted">
+                <div class="small text-muted">
+                  {{ $posts[0]->created_at->diffForHumans() . ' [' }}
+                  <i class="bi bi-eye-fill"></i> {{ $posts[0]->click . ' ]' }}
+                </div>
+              </div>
+            </div>
             <h2 class="card-title">{{ $posts[0]->title }}</h2>
-            <p class="card-text">{{ $posts[0]->excerpt }}</p>
-            <a class="btn btn-primary" href="/posts/{{ $posts[0]->slug }}">Read more →</a>
+            <p class="card-text">{!! $posts[0]->excerpt !!}</p>
+            <a class="btn btn-primary" href="/posts/{{ $posts[0]->slug }}">Read more</a>
           </div>
         </div>
       @endif
 
       <!-- Nested row for non-featured blog posts-->
       <div class="row">
-        @foreach ($posts as $post)
+        @foreach ($posts->skip(1) as $post)
           <div class="col-lg-4">
             <!-- Blog post-->
             <div class="card mb-4">
-              <a href="#!"><img class="card-img-top" src="{{ $post->image }}" alt="..." /></a>
+              <a href="/posts/{{ $post->slug }}"><img class="card-img-top" src="{{ $post->image }}"
+                  alt="..." /></a>
               <div class="card-body">
-                <div class="small text-muted">{{ $post->created_at->diffForHumans() }}</div>
+                <div class="container d-flex mb-2 px-0 align-items-center">
+                  <div class="profile-pic me-1" style="height: 50px; width:50px">
+                    <img src="{{ isset($post->author->image) ? $post->author->image : '/assets/guest.jpeg' }}"
+                      alt="Profile Picture">
+                  </div>
+                  <div>
+                    <small class="text-muted text-break">{{ $post->author->name }}</small class="text-muted">
+                    <div class="text-muted small text-break d-block">{{ $post->category->name }}</div class="text-muted">
+                    <div class="small text-muted">
+                      {{ $posts[0]->created_at->diffForHumans() . ' [' }}
+                      <i class="bi bi-eye-fill"></i> {{ $post->click . ' ]' }}
+                    </div>
+                  </div>
+                </div>
                 <h2 class="card-title h4">{{ $post->title }}</h2>
-                <p class="card-text">{{ $post->excerpt }}</p>
-                <a class="btn btn-primary" href="/posts/{{ $post->slug }}">Read more →</a>
+                <p class="card-text">{!! $post->excerpt !!}</p>
+                <a class="btn btn-primary" href="/posts/{{ $post->slug }}">Read more</a>
               </div>
             </div>
           </div>

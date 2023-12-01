@@ -33,6 +33,7 @@
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Category</th>
+            <th scope="col">Click</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -42,6 +43,7 @@
               <td>{{ $loop->iteration }}</td>
               <td>{{ $post->title }}</td>
               <td>{{ $post->category->name }}</td>
+              <td>{{ $post->click }}</td>
               <td>
                 <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-primary"><span
                     data-feather="eye"></span></a>
