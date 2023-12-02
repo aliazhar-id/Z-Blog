@@ -47,8 +47,8 @@
               <td>
                 <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-primary"><span
                     data-feather="eye"></span></a>
-                <a href="" class="badge bg-warning"><span data-feather="edit"></span></a>
-                <a href="" class="badge bg-danger"><span data-feather="x-circle"></span></a>
+                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning"><span
+                    data-feather="edit"></span></a>
               </td>
             </tr>
           @endforeach

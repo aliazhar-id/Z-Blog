@@ -79,7 +79,15 @@ class PostController extends Controller
    */
   public function edit(Post $post)
   {
-    //
+    if (auth()->user()->id_user != $post->id_user) {
+      return abort(403);
+    }
+
+    return view('dashboard.edit', [
+      'title' => 'Edit',
+      'post' => $post,
+      'categories' => Category::all()
+    ]);
   }
 
   /**
@@ -87,7 +95,56 @@ class PostController extends Controller
    */
   public function update(Request $request, Post $post)
   {
-    //
+    if (auth()->user()->id_user != $post->id_user) {
+      return abort(403);
+    }
+
+
+    $customError = [
+      'title.unique' => 'There is already a post with this title on your blog.'
+    ];
+
+    $isProfileUpdated = false;
+    $rules = [];
+
+    if ($request->title != $post->title) {
+      $rules['title'] = [
+        'required',
+        'min:3',
+        'max:255',
+        Rule::unique('posts')->where(fn ($query) => $query->where('title', request()->title)->where('id_user', auth()->user()->id_user))
+      ];
+
+      $isProfileUpdated = true;
+    }
+
+    if ($request->id_category != $post->id_category) {
+      $rules['id_category'] = 'required';
+      $isProfileUpdated = true;
+    }
+
+    if ($request->body != $post->body) {
+      $rules['body'] = 'required';
+      $isProfileUpdated = true;
+    }
+
+    if (!$isProfileUpdated) {
+      return back()->with('error', 'No profile changes detected!');
+    }
+
+    $validatedData = $request->validate($rules, $customError);
+    $validatedData['image'] = 'https://source.unsplash.com/1200x400';
+
+    if (isset($validatedData['title'])) {
+      $validatedData['slug'] = SlugService::createSlug(Post::class, 'slug', $validatedData['title']);
+    }
+
+    if (isset($validatedData['body'])) {
+      $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 150, '...');
+    }
+
+    Post::where('id_post', $post->id_post)->update($validatedData);
+    return redirect('/dashboard/posts')->with('success', 'Your post has been updated successfully.');
   }
 
   /**
