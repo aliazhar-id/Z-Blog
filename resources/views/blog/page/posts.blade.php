@@ -52,7 +52,7 @@
                     <small class="text-muted text-break">{{ $post->author->name }}</small class="text-muted">
                     <div class="text-muted small text-break d-block">{{ $post->category->name }}</div class="text-muted">
                     <div class="small text-muted">
-                      {{ $posts[0]->created_at->diffForHumans() . ' [' }}
+                      {{ $post->created_at->diffForHumans() . ' [' }}
                       <i class="bi bi-eye-fill"></i> {{ $post->click . ' ]' }}
                     </div>
                   </div>
