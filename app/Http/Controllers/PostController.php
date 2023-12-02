@@ -12,6 +12,17 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 class PostController extends Controller
 {
   /**
+   * Display a listing of the resource.
+   */
+  public function index()
+  {
+    return view('dashboard.posts', [
+      'title' => 'My Post',
+      'posts' => Post::latest()->where('id_user', auth()->user()->id_user)->paginate(10)
+    ]);
+  }
+
+  /**
    * Show the form for creating a new resource.
    */
   public function create()
