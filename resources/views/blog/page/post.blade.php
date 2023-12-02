@@ -6,7 +6,7 @@
       <div class="col-md-8 mt-4">
         <h1 class="mb-3">{{ $post->title }}</h1>
         <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" class="img-fluid"
-          alt="{{ $post->category->name }}">
+          alt="{{ $post->category->name }}" fetchpriority="high">
 
         <article class="my-3 fs-5">{!! $post->body !!}</article>
 

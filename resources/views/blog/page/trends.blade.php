@@ -9,7 +9,8 @@
     <div class="col-lg-9 mx-auto">
       @if ($posts->count())
         <div class="card mb-4">
-          <a href="/posts/{{ $posts[0]->slug }}"><img class="card-img-top" src="{{ $posts[0]->image }}" alt="..." /></a>
+          <a href="/posts/{{ $posts[0]->slug }}"><img class="card-img-top" src="{{ $posts[0]->image }}" alt="..."
+              fetchpriority="high" /></a>
           <div class="card-body">
             <div class="container d-flex mb-2 px-0 align-items-center">
               <div class="profile-pic me-1" style="height: 50px; width:50px">
