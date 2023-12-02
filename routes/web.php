@@ -37,5 +37,5 @@ Route::post('/register', [RegisterController::class, 'register'])->name('actionR
 
 // DASHBOARD
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-Route::resource('/dashboard/posts', DashboardController::class)->middleware('auth');
+Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
 Route::resource('/profile', UserController::class)->parameters(['profile' => 'user'])->only(['index', 'update'])->middleware('auth');
