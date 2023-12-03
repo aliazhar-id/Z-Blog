@@ -27,7 +27,7 @@ class PageController extends Controller
   {
     return view('blog.page.trends', [
       'title' => 'Post',
-      'posts' => Post::orderByDesc('click')->orderByDesc('created_at')->paginate(12)->withQueryString(),
+      'posts' => Post::where('click', '>', 0)->orderByDesc('click')->orderByDesc('created_at')->paginate(12)->withQueryString(),
       'categories' => Category::all()
     ]);
   }

@@ -32,6 +32,8 @@
             <a class="btn btn-primary" href="/posts/{{ $posts[0]->slug }}">Read more</a>
           </div>
         </div>
+      @else
+        <div class="h2 text-center text-secondary">There are no posts that are trending</div>
       @endif
 
       @foreach ($posts->skip(1) as $post)
