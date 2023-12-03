@@ -20,7 +20,7 @@ return new class extends Migration
       $table->text('excerpt');
       $table->text('body');
       $table->integer('click')->default(0);
-      $table->string('image');
+      $table->string('image')->nullable();
       $table->timestamp('published_at')->nullable();
       $table->timestamps();
     });

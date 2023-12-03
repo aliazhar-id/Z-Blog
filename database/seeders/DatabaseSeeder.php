@@ -23,14 +23,14 @@ class DatabaseSeeder extends Seeder
     //     'email' => 'test@example.com',
     // ]);
 
-    User::factory(5)->create();
-
     User::create([
       'name' => 'Ali Azhar',
       'username' => 'aliazhar_id',
       'email' => 'aliazhar.idx@gmail.com',
       'password' => Hash::make('123'),
     ]);
+
+    User::factory(5)->create();
 
     Category::create([
       'name' => 'Freebies',
