@@ -22,7 +22,8 @@ class DashboardController extends Controller
   public function dashboard()
   {
     return view('dashboard.dashboard', [
-      'title' => 'Dashboard'
+      'title' => 'Dashboard',
+      'posts' => Post::where('id_user', auth()->user()->id_user)->get()
     ]);
   }
 
