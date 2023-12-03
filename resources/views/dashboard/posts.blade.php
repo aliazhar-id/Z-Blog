@@ -65,6 +65,8 @@
                     data-feather="eye"></span></a>
                 <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning"><span
                     data-feather="edit"></span></a>
+                <button class="badge bg-danger border-0 text-info" data-toggle="modal" data-target="#deletePostModal"
+                  data-post="{{ $post->slug }}"><span data-feather="x-circle"></span></button>
               </td>
             </tr>
           @endforeach
@@ -72,9 +74,43 @@
       </table>
       <div class="d-flex justify-content-center mt-4">{{ $posts->links() }}</div>
     </div>
+
+    <!-- Delete Post Modal-->
+    <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Are you sure want to delete</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "DELETE" below if you are ready to delete this post.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <form method="POST" id='deleteForm'>
+              @method('DELETE')
+              @csrf
+              <button type="submit" class="btn btn-danger">
+                <i class="far fa-trash-alt"></i> DELETE
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   @else
     <p class="text-center fs-4 mt-5">You Don't Have Any Post Yet.</p>
   @endif
+@endsection
 
-
+@section('custom-script')
+  <script>
+    $('#deletePostModal').on('show.bs.modal', function(event) {
+      const button = $(event.relatedTarget)
+      const post = button.data('post');
+      const modal = $(this);
+      modal.find('form').attr('action', `/dashboard/posts/${post}`);
+    })
+  </script>
 @endsection

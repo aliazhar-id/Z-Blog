@@ -152,6 +152,11 @@ class PostController extends Controller
    */
   public function destroy(Post $post)
   {
-    //
+    if (auth()->user()->id_user != $post->id_user) {
+      return abort(403);
+    }
+
+    Post::destroy($post->id_post);
+    return redirect('/dashboard/posts')->with('success', 'Your post has been deleted successfully.');
   }
 }
