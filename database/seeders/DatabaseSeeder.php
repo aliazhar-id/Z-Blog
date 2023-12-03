@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,13 @@ class DatabaseSeeder extends Seeder
     // ]);
 
     User::factory(5)->create();
+
+    User::create([
+      'name' => 'Ali Azhar',
+      'username' => 'aliazhar_id',
+      'email' => 'aliazhar.idx@gmail.com',
+      'password' => Hash::make('123'),
+    ]);
 
     Category::create([
       'name' => 'Freebies',
