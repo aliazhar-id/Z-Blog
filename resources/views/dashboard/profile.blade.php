@@ -50,7 +50,7 @@
       <div class="card shadow mb-4">
         <div class="card-profile-image mt-4 text-center">
           <img width="180px" class="img-profile rounded-circle"
-            src="{{ isset(auth()->user()->image) ? auth()->user()->image : '/assets/guest.jpeg' }}">
+            src="{{ auth()->user()->image ?? '/assets/guest.jpeg' }}">
         </div>
         <div class="card-body">
 

@@ -11,14 +11,13 @@
       <!-- Featured blog post-->
       @if ($posts->count())
         <div class="card mb-4">
-          <a href="/posts/{{ $posts[0]->slug }}"><img class="card-img-top" src="{{ $posts[0]->image }}" alt="..."
-              fetchpriority="high" /></a>
+          <a href="/posts/{{ $posts[0]->slug }}"><img height="400" class="card-img-top"
+              src="{{ $posts[0]->image ?? '/assets/default-banner.jpg' }}" alt="..." fetchpriority="high" /></a>
           <div class="card-body">
             {{-- Author Info --}}
             <div class="container d-flex mb-2 px-0 align-items-center">
               <div class="profile-pic me-1" style="height: 50px; width:50px">
-                <img src="{{ isset($posts[0]->author->image) ? $posts[0]->author->image : '/assets/guest.jpeg' }}"
-                  alt="Profile Picture">
+                <img src="{{ $posts[0]->author->image ?? '/assets/guest.jpeg' }}" alt="Profile Picture">
               </div>
               <div>
                 <small class="text-muted text-break">{{ $posts[0]->author->name }}</small class="text-muted">
@@ -42,14 +41,13 @@
           <div class="col-lg-4">
             <!-- Blog post-->
             <div class="card mb-4">
-              <a href="/posts/{{ $post->slug }}"><img class="card-img-top" src="{{ $post->image }}"
-                  alt="..." /></a>
+              <a href="/posts/{{ $post->slug }}"><img class="card-img-top"
+                  src="{{ $post->image ?? '/assets/default-banner.jpg' }}" alt="..." /></a>
               <div class="card-body">
                 {{-- Author Info --}}
                 <div class="container d-flex mb-2 px-0 align-items-center">
                   <div class="profile-pic me-1" style="height: 50px; width:50px">
-                    <img src="{{ isset($post->author->image) ? $post->author->image : '/assets/guest.jpeg' }}"
-                      alt="Profile Picture">
+                    <img src="{{ $post->author->image ?? '/assets/guest.jpeg' }}" alt="Profile Picture">
                   </div>
                   <div>
                     <small class="text-muted text-break">{{ $post->author->name }}</small class="text-muted">

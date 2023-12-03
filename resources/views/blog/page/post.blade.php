@@ -5,14 +5,13 @@
     <div class="row justify-content-center mb-5">
       <div class="col-md-8 mt-4">
         <h1 class="mb-3">{{ $post->title }}</h1>
-        <img src="https://source.unsplash.com/1200x400?{{ $post->category->name }}" class="img-fluid"
-          alt="{{ $post->category->name }}" fetchpriority="high">
+        <img src="{{ $post->image ?? '/assets/default-banner.jpg' }}" class="img-fluid" alt="{{ $post->category->name }}"
+          fetchpriority="high">
 
         {{-- Author Info --}}
         <div class="container d-flex my-2 px-0 align-items-center">
           <div class="profile-pic me-1" style="height: 50px; width:50px">
-            <img src="{{ isset($post->author->image) ? $post->author->image : '/assets/guest.jpeg' }}"
-              alt="Profile Picture">
+            <img src="{{ $post->author->image ?? '/assets/guest.jpeg' }}" alt="Profile Picture">
           </div>
           <div>
             <small class="text-muted text-break">{{ $post->author->name }}</small class="text-muted">
