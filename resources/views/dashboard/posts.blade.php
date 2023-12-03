@@ -73,7 +73,7 @@
       <div class="d-flex justify-content-center mt-4">{{ $posts->links() }}</div>
     </div>
   @else
-    <p class="text-center fs-4">You Don't Have Any Post Yet.</p>
+    <p class="text-center fs-4 mt-5">You Don't Have Any Post Yet.</p>
   @endif
 
 

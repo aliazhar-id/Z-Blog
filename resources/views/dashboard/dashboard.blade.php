@@ -3,7 +3,7 @@
 @php
   $postCount = $posts->count();
   $totalClick = $posts->sum('click');
-  $postRate = $totalClick ? ($totalClick / $postCount) * 100 : 0;
+  $postRate = $totalClick ? min(100, floor(($totalClick / $postCount) * 0.0485 * 100)) : 0;
 @endphp
 
 @section('content')
@@ -84,7 +84,7 @@
               <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                 GRADE</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                @if ($postRate == 0)
+                @if ($postRate == 0 && !$postCount)
                   -
                 @elseif ($postRate >= 80)
                   A
@@ -92,7 +92,7 @@
                   B
                 @elseif($postRate >= 40)
                   C
-                @elseif($postRate >= 20)
+                @elseif($postRate >= 10)
                   D
                 @else
                   E

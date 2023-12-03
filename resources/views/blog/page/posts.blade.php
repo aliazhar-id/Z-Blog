@@ -14,6 +14,7 @@
           <a href="/posts/{{ $posts[0]->slug }}"><img class="card-img-top" src="{{ $posts[0]->image }}" alt="..."
               fetchpriority="high" /></a>
           <div class="card-body">
+            {{-- Author Info --}}
             <div class="container d-flex mb-2 px-0 align-items-center">
               <div class="profile-pic me-1" style="height: 50px; width:50px">
                 <img src="{{ isset($posts[0]->author->image) ? $posts[0]->author->image : '/assets/guest.jpeg' }}"
@@ -44,6 +45,7 @@
               <a href="/posts/{{ $post->slug }}"><img class="card-img-top" src="{{ $post->image }}"
                   alt="..." /></a>
               <div class="card-body">
+                {{-- Author Info --}}
                 <div class="container d-flex mb-2 px-0 align-items-center">
                   <div class="profile-pic me-1" style="height: 50px; width:50px">
                     <img src="{{ isset($post->author->image) ? $post->author->image : '/assets/guest.jpeg' }}"

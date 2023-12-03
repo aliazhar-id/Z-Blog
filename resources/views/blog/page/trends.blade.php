@@ -12,6 +12,7 @@
           <a href="/posts/{{ $posts[0]->slug }}"><img class="card-img-top" src="{{ $posts[0]->image }}" alt="..."
               fetchpriority="high" /></a>
           <div class="card-body">
+            {{-- Author Info --}}
             <div class="container d-flex mb-2 px-0 align-items-center">
               <div class="profile-pic me-1" style="height: 50px; width:50px">
                 <img src="{{ isset($posts[0]->author->image) ? $posts[0]->author->image : '/assets/guest.jpeg' }}"
@@ -43,6 +44,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <p class="card-text">{!! $post->excerpt !!}</p>
+                {{-- Author Info --}}
                 <div class="container d-flex mb-2 px-0 align-items-center">
                   <div class="profile-pic me-1" style="height: 50px; width:50px">
                     <img src="{{ isset($post->author->image) ? $post->author->image : '/assets/guest.jpeg' }}"
