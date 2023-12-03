@@ -70,7 +70,3 @@
     </div>
   </div>
 @endsection
-
-@section('footer')
-  @include('blog.partials.footer')
-@endsection

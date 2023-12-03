@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <!-- Responsive navbar-->
   @include('blog.partials.navbar')
 
@@ -27,7 +27,7 @@
   </div>
 
   <!-- Footer-->
-  @yield('footer')
+  @include('blog.partials.footer')
 
   <!-- Bootstrap core JS-->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
