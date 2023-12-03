@@ -26,11 +26,4 @@ class DashboardController extends Controller
       'posts' => Post::where('id_user', auth()->user()->id_user)->get()
     ]);
   }
-
-  public function profile()
-  {
-    return view('dashboard.profile', [
-      'title' => 'Profile'
-    ]);
-  }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,8 @@ class UserController extends Controller
   public function index()
   {
     return view('dashboard.profile', [
-      'title' => 'Profile'
+      'title' => 'Profile',
+      'posts' => Post::where('id_user', auth()->user()->id_user)->get()
     ]);
   }
 

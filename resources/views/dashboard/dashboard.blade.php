@@ -4,6 +4,22 @@
   $postCount = $posts->count();
   $totalClick = $posts->sum('click');
   $postRate = $totalClick ? min(100, floor(($totalClick / $postCount) * 0.0485 * 100)) : 0;
+  $grade = '-';
+
+  if ($postCount) {
+      if ($postRate >= 80) {
+          $grade = 'A';
+      } elseif ($postRate >= 60) {
+          $grade = 'B';
+      } elseif ($postRate >= 40) {
+          $grade = 'C';
+      } elseif ($postRate >= 10) {
+          $grade = 'D';
+      } else {
+          $grade = 'E';
+      }
+  }
+
 @endphp
 
 @section('content')
@@ -83,21 +99,7 @@
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                 GRADE</div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">
-                @if ($postRate == 0 && !$postCount)
-                  -
-                @elseif ($postRate >= 80)
-                  A
-                @elseif($postRate >= 60)
-                  B
-                @elseif($postRate >= 40)
-                  C
-                @elseif($postRate >= 10)
-                  D
-                @else
-                  E
-                @endif
-              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $grade }}</div>
             </div>
             <div class="col-auto">
               <i class="fas fa-medal fa-2x text-gray-300"></i>

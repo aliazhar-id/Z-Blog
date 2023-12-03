@@ -1,5 +1,29 @@
 @extends('dashboard.layouts.main')
 
+@php
+  $postCount = $posts->count();
+  $totalClick = $posts->sum('click');
+  $postRate = $totalClick ? min(100, floor(($totalClick / $postCount) * 0.0485 * 100)) : 0;
+  $grade = 'No';
+
+  $role = $postCount ? 'Writer' : 'Member';
+
+  if ($postCount) {
+      if ($postRate >= 80) {
+          $grade = 'A';
+      } elseif ($postRate >= 60) {
+          $grade = 'B';
+      } elseif ($postRate >= 40) {
+          $grade = 'C';
+      } elseif ($postRate >= 10) {
+          $grade = 'D';
+      } else {
+          $grade = 'E';
+      }
+  }
+
+@endphp
+
 @section('content')
   <h1 class="h3 mb-4 text-gray-800">Profile</h1>
 
@@ -34,7 +58,7 @@
             <div class="col-lg-12">
               <div class="text-center">
                 <h5 class="font-weight-bold">{{ auth()->user()->name }}</h5>
-                <p>Member</p>
+                <p>{{ $role }}</p>
               </div>
             </div>
           </div>
@@ -42,20 +66,20 @@
           <div class="row">
             <div class="col-md-4">
               <div class="card-profile-stats">
-                <span class="heading">22</span>
-                <span class="description">Friends</span>
+                <span class="heading">{{ $postCount }}</span>
+                <span class="description">Post</span>
               </div>
             </div>
             <div class="col-md-4">
               <div class="card-profile-stats">
-                <span class="heading">10</span>
-                <span class="description">Photos</span>
+                <span class="heading">{{ $totalClick }}</span>
+                <span class="description">Click</span>
               </div>
             </div>
             <div class="col-md-4">
               <div class="card-profile-stats">
-                <span class="heading">89</span>
-                <span class="description">Comments</span>
+                <span class="heading">{{ $grade }}</span>
+                <span class="description">Grade</span>
               </div>
             </div>
           </div>
