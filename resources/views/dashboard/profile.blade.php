@@ -43,65 +43,75 @@
     </div>
   @endif
 
-  <div class="row">
+  <form action="/profile/{{ auth()->user()->username }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+    @csrf
+    @method('PATCH')
 
-    <div class="col-lg-4 order-lg-2">
+    <div class="row">
+      <div class="col-lg-4 order-lg-2">
+        <div class="card shadow mb-4">
+          <div class="card-profile-image mt-4 text-center position-relative">
+            <div class="rounded-circle overflow-hidden position-relative mx-auto shadow-lg" style="width: fit-content">
+              <img width="180px" height="180px" id="profile-image-preview"
+                src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : '/assets/guest.jpeg' }}">
+              <div class="profile-image-group position-absolute text-center pt-1">
+                <input class="d-none" type="file" id="profile-image-input" name="image" />
+                <label for="profile-image-input">
+                  <i class="fas fa-2x text-gray-300 fa-camera"></i>
+                </label>
+              </div>
+            </div>
+            <p class="text-danger mt-2 mb-0">
+              @error('image')
+                {{ $message }}
+              @enderror &nbsp;
+            </p>
+          </div>
+          <div class="card-body pt-1">
 
-      <div class="card shadow mb-4">
-        <div class="card-profile-image mt-4 text-center">
-          <img width="180px" class="img-profile rounded-circle"
-            src="{{ auth()->user()->image ?? '/assets/guest.jpeg' }}">
-        </div>
-        <div class="card-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="text-center">
+                  <h5 class="font-weight-bold">{{ auth()->user()->name }}</h5>
+                  <p>{{ $role }}</p>
+                </div>
+              </div>
+            </div>
 
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="text-center">
-                <h5 class="font-weight-bold">{{ auth()->user()->name }}</h5>
-                <p>{{ $role }}</p>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card-profile-stats">
+                  <span class="heading">{{ $postCount }}</span>
+                  <span class="description">Post</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card-profile-stats">
+                  <span class="heading">{{ $totalClick }}</span>
+                  <span class="description">Click</span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card-profile-stats">
+                  <span class="heading">{{ $grade }}</span>
+                  <span class="description">Grade</span>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card-profile-stats">
-                <span class="heading">{{ $postCount }}</span>
-                <span class="description">Post</span>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card-profile-stats">
-                <span class="heading">{{ $totalClick }}</span>
-                <span class="description">Click</span>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card-profile-stats">
-                <span class="heading">{{ $grade }}</span>
-                <span class="description">Grade</span>
-              </div>
-            </div>
-          </div>
         </div>
+
       </div>
 
-    </div>
+      <div class="col-lg-8 order-lg-1">
 
-    <div class="col-lg-8 order-lg-1">
+        <div class="card shadow mb-4">
 
-      <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">My Account</h6>
+          </div>
 
-        <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">My Account</h6>
-        </div>
-
-        <div class="card-body">
-
-          <form action="/profile/{{ auth()->user()->username }}" method="POST" autocomplete="off">
-            @csrf
-            @method('PATCH')
-
+          <div class="card-body">
             <h6 class="heading-small text-muted mb-4">User information</h6>
 
             <div class="pl-lg-4">
@@ -193,13 +203,30 @@
                 </div>
               </div>
             </div>
-          </form>
+
+          </div>
 
         </div>
 
       </div>
 
     </div>
+  </form>
+@endsection
 
-  </div>
+@section('custom-script')
+  <script>
+    const profileImagePreview = document.querySelector('#profile-image-preview');
+    const profileImageInput = document.querySelector('#profile-image-input');
+
+    profileImageInput.addEventListener('change', () => {
+      const oFReader = new FileReader();
+      oFReader.readAsDataURL(profileImageInput.files[0]);
+
+      oFReader.addEventListener('load', (e) => {
+        profileImagePreview.src = e.target.result;
+      })
+
+    });
+  </script>
 @endsection

@@ -28,7 +28,7 @@
               data-bs-toggle="dropdown" aria-expanded="false">
               <span class="mx-2">{{ auth()->user()->name }}</span>
               <div class="profile-pic">
-                <img src="{{ isset(auth()->user()->image) ? auth()->user()->image : '/assets/guest.jpeg' }}"
+                <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : '/assets/guest.jpeg' }}"
                   alt="Profile Picture">
               </div>
 

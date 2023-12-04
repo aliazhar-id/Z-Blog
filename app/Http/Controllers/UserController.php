@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -80,6 +81,11 @@ class UserController extends Controller
       $isProfileUpdated = true;
     }
 
+    if ($request->file('image')) {
+      $rules['image'] = 'image|file|max:512';
+      $isProfileUpdated = true;
+    }
+
     $validatedData = $request->validate($rules);
 
     if ($request->new_password) {
@@ -87,6 +93,14 @@ class UserController extends Controller
       $isProfileUpdated = true;
     } else {
       unset($validatedData['password']);
+    }
+
+    if ($request->file('image')) {
+      if ($user->image) {
+        Storage::delete($user->image);
+      }
+
+      $validatedData['image'] = $request->file('image')->store('profile-images');
     }
 
     if (!$isProfileUpdated) {

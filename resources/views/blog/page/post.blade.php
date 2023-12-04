@@ -11,7 +11,8 @@
         {{-- Author Info --}}
         <div class="container d-flex my-2 px-0 align-items-center">
           <div class="profile-pic me-1" style="height: 50px; width:50px">
-            <img src="{{ $post->author->image ?? '/assets/guest.jpeg' }}" alt="Profile Picture">
+            <img src="{{ $post->author->image ? asset('storage/' . $post->author->image) : '/assets/guest.jpeg' }}"
+              alt="Profile Picture">
           </div>
           <div>
             <small class="text-muted text-break">{{ $post->author->name }}</small class="text-muted">

@@ -56,7 +56,6 @@ class PostController extends Controller
     $validatedData['id_user'] = auth()->user()->id_user;
     $validatedData['slug'] = SlugService::createSlug(Post::class, 'slug', $validatedData['title']);
     $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 150, '...');
-    $validatedData['image'] = 'https://source.unsplash.com/1200x400';
 
     Post::create($validatedData);
 
