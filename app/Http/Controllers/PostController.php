@@ -58,7 +58,10 @@ class PostController extends Controller
     $validatedData['id_user'] = auth()->user()->id_user;
     $validatedData['slug'] = SlugService::createSlug(Post::class, 'slug', $validatedData['title']);
     $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 150, '...');
-    $validatedData['image'] = $request->file('image')->store('post-banners');
+
+    if ($request->file('image')) {
+      $validatedData['image'] = $request->file('image')->store('post-banners');
+    }
 
     Post::create($validatedData);
     return redirect('/dashboard/posts')->with('success', 'Your post has been successfully posted!');
@@ -99,7 +102,6 @@ class PostController extends Controller
     if (auth()->user()->id_user != $post->id_user) {
       return abort(403);
     }
-
 
     $customError = [
       'title.unique' => 'There is already a post with this title on your blog.'
