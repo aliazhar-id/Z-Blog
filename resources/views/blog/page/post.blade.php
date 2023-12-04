@@ -26,7 +26,7 @@
           </div>
         </div>
 
-        @if (auth()->user()->id_user === $post->id_user)
+        @if (auth()->user()?->id_user === $post->id_user)
           <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning">
             <i class="bi bi-pencil-square"></i> Edit
           </a>
