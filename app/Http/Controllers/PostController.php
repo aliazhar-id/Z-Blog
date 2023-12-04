@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class PostController extends Controller
@@ -50,16 +51,17 @@ class PostController extends Controller
         Rule::unique('posts')->where(fn ($query) => $query->where('title', request()->title)->where('id_user', auth()->user()->id_user))
       ],
       'id_category' => 'required',
+      'image' => 'image|file|max:512',
       'body' => 'required'
     ], $customError);
 
     $validatedData['id_user'] = auth()->user()->id_user;
     $validatedData['slug'] = SlugService::createSlug(Post::class, 'slug', $validatedData['title']);
     $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body']), 150, '...');
+    $validatedData['image'] = $request->file('image')->store('post-banners');
 
     Post::create($validatedData);
-
-    return redirect('/dashboard/posts');
+    return redirect('/dashboard/posts')->with('success', 'Your post has been successfully posted!');
   }
 
   /**
@@ -122,6 +124,11 @@ class PostController extends Controller
       $isProfileUpdated = true;
     }
 
+    if ($request->file('image')) {
+      $rules['image'] = 'image|file|max:512';
+      $isProfileUpdated = true;
+    }
+
     if ($request->body != $post->body) {
       $rules['body'] = 'required';
       $isProfileUpdated = true;
@@ -132,10 +139,17 @@ class PostController extends Controller
     }
 
     $validatedData = $request->validate($rules, $customError);
-    $validatedData['image'] = 'https://source.unsplash.com/1200x400';
 
     if (isset($validatedData['title'])) {
       $validatedData['slug'] = SlugService::createSlug(Post::class, 'slug', $validatedData['title']);
+    }
+
+    if ($request->file('image')) {
+      if ($post->image) {
+        Storage::delete($post->image);
+      }
+
+      $validatedData['image'] = $request->file('image')->store('post-banners');
     }
 
     if (isset($validatedData['body'])) {

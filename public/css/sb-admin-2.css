@@ -20,6 +20,11 @@
     width: 100%;
 }
 
+.profile-image-group:hover {
+    filter: brightness(0.8);
+    transition-duration: 300ms;
+}
+
 :root {
     --blue: #4e73df;
     --indigo: #6610f2;

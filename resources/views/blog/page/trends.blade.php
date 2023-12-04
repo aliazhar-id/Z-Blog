@@ -10,12 +10,15 @@
       @if ($posts->count())
         <div class="card mb-4">
           <a href="/posts/{{ $posts[0]->slug }}"><img class="card-img-top" height="400"
-              src="{{ $posts[0]->image ?? '/assets/default-banner.jpg' }}" alt="..." fetchpriority="high" /></a>
+              src="{{ $posts[0]->image ? asset('storage/' . $posts[0]->image) : '/assets/default-banner.jpg' }}"
+              alt="..." fetchpriority="high" /></a>
           <div class="card-body">
             {{-- Author Info --}}
             <div class="container d-flex mb-2 px-0 align-items-center">
               <div class="profile-pic me-1" style="height: 50px; width:50px">
-                <img src="{{ $posts[0]->author->image ? asset('storage/' . $posts[0]->author->image) : '/assets/guest.jpeg' }}" alt="Profile Picture">
+                <img
+                  src="{{ $posts[0]->author->image ? asset('storage/' . $posts[0]->author->image) : '/assets/guest.jpeg' }}"
+                  alt="Profile Picture">
               </div>
               <div>
                 <small class="text-muted text-break">{{ $posts[0]->author->name }}</small class="text-muted">
@@ -39,8 +42,8 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{{ $post->image ?? '/assets/default-banner.jpg' }}" style="height: 100%;"
-                class="img-fluid rounded-start" alt="...">
+              <img src="{{ $post->image ? asset('storage/' . $post->image) : '/assets/default-banner.jpg' }}"
+                style="height: 100%;" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8">
               <div class="card-body">
@@ -49,7 +52,9 @@
                 {{-- Author Info --}}
                 <div class="container d-flex mb-2 px-0 align-items-center">
                   <div class="profile-pic me-1" style="height: 50px; width:50px">
-                    <img src="{{ $post->author->image ? asset('storage/' . $post->author->image) : '/assets/guest.jpeg' }}" alt="Profile Picture">
+                    <img
+                      src="{{ $post->author->image ? asset('storage/' . $post->author->image) : '/assets/guest.jpeg' }}"
+                      alt="Profile Picture">
                   </div>
                   <div>
                     <small class="text-muted text-break">{{ $post->author->name }}</small class="text-muted">

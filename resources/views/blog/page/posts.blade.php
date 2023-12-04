@@ -12,7 +12,8 @@
       @if ($posts->count())
         <div class="card mb-4">
           <a href="/posts/{{ $posts[0]->slug }}"><img height="400" class="card-img-top"
-              src="{{ $posts[0]->image ?? '/assets/default-banner.jpg' }}" alt="..." fetchpriority="high" /></a>
+              src="{{ $posts[0]->image ? asset('storage/' . $posts[0]->image) : '/assets/default-banner.jpg' }}"
+              alt="..." fetchpriority="high" /></a>
           <div class="card-body">
             {{-- Author Info --}}
             <div class="container d-flex mb-2 px-0 align-items-center">
@@ -44,7 +45,8 @@
             <!-- Blog post-->
             <div class="card mb-4">
               <a href="/posts/{{ $post->slug }}"><img class="card-img-top"
-                  src="{{ $post->image ?? '/assets/default-banner.jpg' }}" alt="..." /></a>
+                  src="{{ $post->image ? asset('storage/' . $post->image) : '/assets/default-banner.jpg' }}"
+                  alt="..." /></a>
               <div class="card-body">
                 {{-- Author Info --}}
                 <div class="container d-flex mb-2 px-0 align-items-center">

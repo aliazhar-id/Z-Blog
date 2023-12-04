@@ -5,8 +5,8 @@
     <div class="row justify-content-center mb-5">
       <div class="col-md-8 mt-4">
         <h1 class="mb-3">{{ $post->title }}</h1>
-        <img src="{{ $post->image ?? '/assets/default-banner.jpg' }}" class="img-fluid" alt="{{ $post->category->name }}"
-          fetchpriority="high">
+        <img src="{{ $post->image ? asset('storage/' . $post->image) : '/assets/default-banner.jpg' }}" class="img-fluid"
+          alt="{{ $post->category->name }}" fetchpriority="high">
 
         {{-- Author Info --}}
         <div class="container d-flex my-2 px-0 align-items-center">

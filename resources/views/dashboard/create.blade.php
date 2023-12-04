@@ -17,7 +17,7 @@
 
         <div class="card-body">
 
-          <form action="/dashboard/posts" method="POST" autocomplete="off">
+          <form action="/dashboard/posts" method="POST" autocomplete="off" enctype="multipart/form-data">
             @csrf
             <div class="pl-lg-4">
               <div class="row">
@@ -46,9 +46,26 @@
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col">
+                  <div class="mb-1">Image</div>
+                  <img class="d-none image-banner-preview img-fluid img-thumbnail mb-2" alt=""
+                    style="max-height: 200px">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="image-banner-input" name="image">
+                    <label class="custom-file-label" for="image-banner-input">Choose file</label>
+                  </div>
+
+                  @error('image')
+                    <p class="text-danger mt-2 mb-0">{{ $message }}</p>
+                  @enderror &nbsp;
+                </div>
+              </div>
+
               <div class="row mb-3">
                 <div class="col-lg-12">
-                  <textarea name="body">{{ old('body') }}</textarea>
+                  <label for="body" class="form-label">Body<span class="small text-danger">*</span></label>
+                  <textarea id="body" name="body">{{ old('body') }}</textarea>
 
                   @error('body')
                     <p class="text-danger">{{ $message }}</p>
@@ -78,9 +95,30 @@
 
 @section('custom-script')
   <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
   <script>
     CKEDITOR.replace('body', {
       language: 'en',
+    });
+  </script>
+
+  <script>
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+    const bannerPreview = document.querySelector('.image-banner-preview');
+    const bannerInput = document.querySelector('#image-banner-input');
+
+    bannerInput.addEventListener('change', () => {
+      const oFReader = new FileReader();
+      oFReader.readAsDataURL(bannerInput.files[0]);
+
+      oFReader.addEventListener('load', (e) => {
+        bannerPreview.src = e.target.result;
+        bannerPreview.classList.remove('d-none');
+      })
     });
   </script>
 @endsection
