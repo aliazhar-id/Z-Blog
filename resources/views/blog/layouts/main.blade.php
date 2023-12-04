@@ -34,6 +34,8 @@
 
   <!-- Core theme JS-->
   <script src="/js/scripts.js"></script>
+
+  @yield('custom-script')
 </body>
 
 </html>

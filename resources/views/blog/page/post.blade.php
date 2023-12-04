@@ -26,10 +26,57 @@
           </div>
         </div>
 
+        @if (auth()->user()->id_user === $post->id_user)
+          <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning">
+            <i class="bi bi-pencil-square"></i> Edit
+          </a>
+
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal"
+            data-post="{{ $post->slug }}">
+            <i class="bi bi-trash3"></i> Delete
+          </button>
+        @endif
+
         <article class="my-3 fs-5">{!! $post->body !!}</article>
 
         <a href="/posts" class="d-block mt-3">Back to Posts</a>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deletePostModalLabel">Are you sure want to delete?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Select "DELETE" below if you are ready to delete this post.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <form method="POST" id='deleteForm'>
+              @method('DELETE')
+              @csrf
+              <button type="submit" class="btn btn-danger">
+                <i class="bi bi-trash3"></i> DELETE
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+@endsection
+
+@section('custom-script')
+  <script>
+    const deletePostModal = document.querySelector('#deletePostModal');
+
+    deletePostModal.addEventListener('shown.bs.modal', function(e) {
+      const post = e.relatedTarget.dataset.post;
+      document.querySelector('#deleteForm').setAttribute('action', `/dashboard/posts/${post}`);
+    });
+  </script>
 @endsection
