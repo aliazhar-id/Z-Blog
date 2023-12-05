@@ -19,7 +19,7 @@ class PostController extends Controller
   {
     return view('dashboard.posts', [
       'title' => 'My Post',
-      'posts' => Post::latest()->where('id_user', auth()->user()->id_user)->paginate(10)
+      'posts' => Post::latest()->where('id_user', auth()->user()->id_user)->filter(request(['search']))->paginate(10)
     ]);
   }
 

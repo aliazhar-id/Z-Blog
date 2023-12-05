@@ -18,7 +18,7 @@ class PageController extends Controller
   {
     return view('blog.page.posts', [
       'title' => 'Post',
-      'posts' => Post::latest()->paginate(12)->withQueryString(),
+      'posts' => Post::latest()->filter(request(['search', 'body']))->paginate(12)->withQueryString(),
       'categories' => Category::all()
     ]);
   }
@@ -44,6 +44,14 @@ class PageController extends Controller
     return view('blog.page.post', [
       'title' => 'Post',
       'post' => $post
+    ]);
+  }
+
+  public function dashboard()
+  {
+    return view('dashboard.dashboard', [
+      'title' => 'Dashboard',
+      'posts' => Post::where('id_user', auth()->user()->id_user)->get()
     ]);
   }
 }

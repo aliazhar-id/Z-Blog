@@ -33,34 +33,19 @@ class Post extends Model
 
   public function scopeFilter($query, array $filters)
   {
-    $query->when($filters['searchx'] ?? false, function ($query, $search) {
-      return $query->where(function ($query) use ($search) {
-        $query->where('title', 'like', '%' . $search . '%');
+    if ($filters['search'] ?? false) {
+      $query->when($filters['search'] ?? false, function ($query, $search) {
+        return $query->where(function ($query) use ($search) {
+          $query->where('title', 'like', "%$search%");
+        });
       });
-    });
 
-    $query->when($filters['search'] ?? false, function ($query, $search) {
-      return $query->where(function ($query) use ($search) {
-        $query->where('title', 'like', '%' . $search . '%')
-          ->orWhere('body', 'like', '%' . $search . '%');
+      $query->when(isset($filters['body']) ? $filters['search'] : false, function ($query, $search) {
+        return $query->orWhere(function ($query) use ($search) {
+          $query->where('body', 'like', "%$search%");
+        });
       });
-    });
-
-    $query->when($filters['category'] ?? false, function ($query, $category) {
-      return $query->whereHas('category', function ($query) use ($category) {
-        $query->where('slug', $category);
-      });
-    });
-
-    $query->when(
-      $filters['author'] ?? false,
-      fn ($query, $author) =>
-      $query->whereHas(
-        'author',
-        fn ($query) =>
-        $query->where('username', $author)
-      )
-    );
+    }
   }
 
   public function sluggable(): array

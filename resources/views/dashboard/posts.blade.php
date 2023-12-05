@@ -10,7 +10,7 @@
       @endif
 
       <div class="input-group">
-        <input type="text" name="searchx" value="{{ request('searchx') }}" class="form-control bg-white border-1 small"
+        <input type="text" name="search" value="{{ request('search') }}" class="form-control bg-white border-1 small"
           placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button class="btn btn-primary" type="submit">
