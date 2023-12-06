@@ -100,7 +100,7 @@
       </div>
     </div>
   @else
-    <p class="text-center fs-4 mt-5">You Don't Have Any Post Yet.</p>
+    <p class="text-center mt-5">No Posts Found :(</p>
   @endif
 @endsection
 

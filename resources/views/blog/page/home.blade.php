@@ -36,6 +36,10 @@
             <a class="btn btn-primary" href="{{ route('home') . '/' . $posts[0]->slug . '/read' }}">Read more</a>
           </div>
         </div>
+      @else
+        <div class="d-flex justify-content-center align-items-center" style="height: 100%">
+          <h1 class="text-secondary">No Posts Found :(</h1>
+        </div>
       @endif
 
       <!-- Nested row for non-featured blog posts-->
@@ -102,7 +106,7 @@
               <div class="col-sm-6">
                 <ul class="list-unstyled mb-0">
                   @foreach ($group as $category)
-                    <li><a href="#!">{{ $category->name }}</a></li>
+                    <li>>{{ $category->name }}</li>
                   @endforeach
                 </ul>
               </div>
@@ -113,9 +117,9 @@
       </div>
       <!-- Side widget-->
       <div class="card mb-4">
-        <div class="card-header">Side Widget</div>
-        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and
-          feature the Bootstrap 5 card component!</div>
+        <div class="card-header">Ads</div>
+        <div class="card-body d-flex justify-content-center align-items-center" style="height: 150px">Space Available!
+        </div>
       </div>
     </div>
   </div>
