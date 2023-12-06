@@ -67,8 +67,8 @@
                 @enderror
               </div>
               <div class="form-floating col-6 ps-1">
-                <input type="password" class="form-control rounded-4" name="password_confirmation" id="password_confirmation"
-                  value="" placeholder="">
+                <input type="password" class="form-control rounded-4" name="password_confirmation"
+                  id="password_confirmation" value="" placeholder="">
                 <label for="password_confirmation" class="form-label">Confirm Password</label>
               </div>
             </div>

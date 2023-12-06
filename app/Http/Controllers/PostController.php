@@ -40,7 +40,7 @@ class PostController extends Controller
   public function store(Request $request)
   {
     $customError = [
-      'title.unique' => 'There is already a post with this title on your blog.'
+      'title.unique' => "You already have a post with this title!"
     ];
 
     $validatedData = $request->validate([
@@ -104,7 +104,7 @@ class PostController extends Controller
     }
 
     $customError = [
-      'title.unique' => 'There is already a post with this title on your blog.'
+      'title.unique' => "You already have post with this title!"
     ];
 
     $isProfileUpdated = false;

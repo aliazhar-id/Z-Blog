@@ -22,15 +22,14 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
         @auth
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-              data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
               <span class="mx-2">{{ auth()->user()->name }}</span>
               <div class="profile-pic">
                 <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : '/assets/guest.jpeg' }}"
                   alt="Profile Picture">
               </div>
-
-            </a>
+            </div>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li>
                 <a class="dropdown-item" href="{{ route('dashboard') }}"><i class="bi bi-card-list"></i> Dashboard</a>

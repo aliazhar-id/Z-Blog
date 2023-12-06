@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $guarded = ['id_category'];
-    protected $primaryKey = 'id_category';
-  
-    public function posts()
-    {
-      return $this->hasMany(Post::class);
-    }
+  protected $guarded = ['id_category'];
+  protected $primaryKey = 'id_category';
+
+  public function posts()
+  {
+    return $this->hasMany(Post::class);
+  }
 }
