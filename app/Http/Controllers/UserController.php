@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -100,7 +101,19 @@ class UserController extends Controller
         Storage::delete($user->image);
       }
 
-      $validatedData['image'] = $request->file('image')->store('profile-images');
+      $image = Image::make($request->file('image'));
+      $ratio = 1 / 1;
+
+      if (intval($image->width() / $ratio > $image->height())) {
+        $image->fit(intval($image->height() * $ratio), $image->height());
+      } else {
+        $image->fit($image->width(), intval($image->width() / $ratio));
+      }
+
+      $filePath = 'profile-images/' . uniqid() . uniqid() . '.jpg';
+      $image->save(storage_path('app/public/' . $filePath));
+
+      $validatedData['image'] = $filePath;
     }
 
     if (!$isProfileUpdated) {
