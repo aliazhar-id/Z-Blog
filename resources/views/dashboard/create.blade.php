@@ -48,7 +48,7 @@
 
               <div class="row">
                 <div class="col">
-                  <div class="mb-1">Image</div>
+                  <div class="mb-1">Image <small><i>( Maks. 512 KB )</i></small></div>
                   <img class="d-none image-banner-preview img-fluid img-thumbnail mb-2" alt=""
                     style="max-height: 200px">
                   <div class="custom-file">

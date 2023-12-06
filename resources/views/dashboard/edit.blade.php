@@ -59,7 +59,7 @@
 
               <div class="row">
                 <div class="col">
-                  <div class="mb-1">Image</div>
+                  <div class="mb-1">Image <small><i>( Maks. 512 KB )</i></small></div>
 
                   @if ($post->image)
                     <img src="{{ asset('storage/' . $post->image) }}"

@@ -3,7 +3,7 @@
   id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('blogs') }}">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-th-large"></i>
     </div>
