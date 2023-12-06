@@ -5,59 +5,118 @@
 @endsection
 
 @section('content')
-  <div class="row my-3">
-    <section id="tentang-z-blog">
-      <h2>Tentang Z-Blog</h2>
-      <p>
-        Z-Blog adalah blog pribadi yang membahas berbagai macam hal tentang teknologi, hiburan, fashion, hingga kehidupan
-        sehari-hari.
-      </p>
-      <p>
-        Z-Blog ingin menjadi sumber informasi dan hiburan yang bermanfaat bagi para pembaca, khususnya anak-anak muda
-        zaman gen Z. Blog ini juga ingin mengajak para pembaca untuk saling berbagi dan berdiskusi tentang berbagai macam
-        hal.
-      </p>
-      <p>
-        Berikut adalah beberapa kategori konten yang akan dibahas di Z-Blog:
-      </p>
-      <ul>
-        <li>Teknologi</li>
-        <li>Hiburan</li>
-        <li>Fashion</li>
-        <li>Kehidupan sehari-hari</li>
-      </ul>
-      <p>
-        Z-Blog akan selalu diperbarui dengan konten-konten baru setiap minggunya. Silakan kunjungi Z-Blog untuk membaca
-        konten-konten menarik yang dibagikan oleh penulis.
-      </p>
-    </section>
-    <section id="apa-yang-bisa-anda-temukan-di-z-blog">
-      <h2>Apa yang bisa Anda temukan di Z-Blog?</h2>
-      <p>
-        Di Z-Blog, Anda akan menemukan berbagai macam konten yang menarik dan informatif. Berikut adalah beberapa contoh
-        konten yang akan Anda temukan di Z-Blog:
-      </p>
-      <ul>
-        <li>Review gadget terbaru</li>
-        <li>Tips dan trik menggunakan software</li>
-        <li>Rekomendasi film, musik, dan game</li>
-        <li>Tren fashion terbaru</li>
-        <li>Opini tentang berbagai macam isu</li>
-      </ul>
-    </section>
-    <section id="siapa-yang-bisa-membaca-z-blog">
-      <h2>Siapa yang bisa membaca Z-Blog?</h2>
-      <p>
-        Z-Blog terbuka untuk semua orang. Siapa saja dapat membaca dan berkomentar di blog ini. Z-Blog juga menerima
-        tulisan dari para pembaca yang ingin berbagi ide dan pengalaman mereka.
-      </p>
-    </section>
-    <section id="yuk-bergabung-dengan-z-blog">
-      <h2>Yuk, bergabung dengan Z-Blog!</h2>
-      <p>
-        Z-Blog adalah tempat yang tepat bagi Anda untuk belajar, berbagi, dan berdiskusi. Kunjungi Z-Blog sekarang juga
-        untuk membaca konten-konten menarik yang dibagikan oleh penulis.
-      </p>
-    </section>
+  <div class="row">
+    <!-- Blog entries-->
+    <div class="col-lg-9">
+      <!-- Featured blog post-->
+      @if ($posts->count())
+        <div class="card mb-4">
+          <a href="{{ route('home') . '/' . $posts[0]->slug . '/read' }}"><img height="400" class="card-img-top"
+              src="{{ $posts[0]->image ? asset('storage/' . $posts[0]->image) : '/assets/default-banner.jpg' }}"
+              alt="..." fetchpriority="high" /></a>
+          <div class="card-body">
+            {{-- Author Info --}}
+            <div class="container d-flex mb-2 px-0 align-items-center">
+              <div class="profile-pic me-1" style="height: 50px; width:50px">
+                <img
+                  src="{{ $posts[0]->author->image ? asset('storage/' . $posts[0]->author->image) : '/assets/guest.jpeg' }}"
+                  alt="Profile Picture">
+              </div>
+              <div>
+                <small class="text-muted text-break">{{ $posts[0]->author->name }}</small class="text-muted">
+                <div class="text-muted small text-break d-block">{{ $posts[0]->category->name }}</div class="text-muted">
+                <div class="small text-muted">
+                  {{ $posts[0]->created_at->diffForHumans() . ' [' }}
+                  <i class="bi bi-eye-fill"></i> {{ $posts[0]->click . ' ]' }}
+                </div>
+              </div>
+            </div>
+            <h2 class="card-title">{{ $posts[0]->title }}</h2>
+            <p class="card-text">{!! $posts[0]->excerpt !!}</p>
+            <a class="btn btn-primary" href="{{ route('home') . '/' . $posts[0]->slug . '/read' }}">Read more</a>
+          </div>
+        </div>
+      @endif
+
+      <!-- Nested row for non-featured blog posts-->
+      <div class="row">
+        @foreach ($posts->skip(1) as $post)
+          <div class="col-lg-4">
+            <!-- Blog post-->
+            <div class="card mb-4">
+              <a href="{{ route('home') . '/' . $post->slug . '/read' }}"><img class="card-img-top"
+                  src="{{ $post->image ? asset('storage/' . $post->image) : '/assets/default-banner.jpg' }}"
+                  alt="..." /></a>
+              <div class="card-body">
+                {{-- Author Info --}}
+                <div class="container d-flex mb-2 px-0 align-items-center">
+                  <div class="profile-pic me-1" style="height: 50px; width:50px">
+                    <img
+                      src="{{ $post->author->image ? asset('storage/' . $post->author->image) : '/assets/guest.jpeg' }}"
+                      alt="Profile Picture">
+                  </div>
+                  <div>
+                    <small class="text-muted text-break">{{ $post->author->name }}</small class="text-muted">
+                    <div class="text-muted small text-break d-block">{{ $post->category->name }}</div class="text-muted">
+                    <div class="small text-muted">
+                      {{ $post->created_at->diffForHumans() . ' [' }}
+                      <i class="bi bi-eye-fill"></i> {{ $post->click . ' ]' }}
+                    </div>
+                  </div>
+                </div>
+                <h2 class="card-title h4">{{ $post->title }}</h2>
+                <p class="card-text">{!! $post->excerpt !!}</p>
+                <a class="btn btn-primary" href="{{ route('home') . '/' . $post->slug . '/read' }}">Read more</a>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+
+      <!-- Pagination-->
+      <div class="d-flex justify-content-center">{{ $posts->links() }}</div>
+    </div>
+    <!-- Side widgets-->
+    <div class="col-lg-3">
+      <!-- Search widget-->
+      <div class="card mb-4">
+        <div class="card-header">Search</div>
+        <div class="card-body">
+          <form action="{{ route('home') }}">
+            <div class="input-group">
+              <input class="form-control" type="text" name="search" value="{{ request('search') }}"
+                placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+              <input type="hidden" name="body" value="1">
+              <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Categories widget-->
+      <div class="card mb-4">
+        <div class="card-header">Categories</div>
+        <div class="card-body">
+          <div class="row">
+
+            @foreach ($categories->chunk(ceil($categories->count() / 2)) as $group)
+              <div class="col-sm-6">
+                <ul class="list-unstyled mb-0">
+                  @foreach ($group as $category)
+                    <li><a href="#!">{{ $category->name }}</a></li>
+                  @endforeach
+                </ul>
+              </div>
+            @endforeach
+
+          </div>
+        </div>
+      </div>
+      <!-- Side widget-->
+      <div class="card mb-4">
+        <div class="card-header">Side Widget</div>
+        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and
+          feature the Bootstrap 5 card component!</div>
+      </div>
+    </div>
   </div>
 @endsection

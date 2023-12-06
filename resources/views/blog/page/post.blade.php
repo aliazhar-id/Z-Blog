@@ -39,7 +39,7 @@
 
         <article class="my-3 fs-5">{!! $post->body !!}</article>
 
-        <a href="/posts" class="d-block mt-3">Back to Posts</a>
+        <a href="{{ route('home') }}" class="d-block mt-3">Back to Home</a>
       </div>
     </div>
 

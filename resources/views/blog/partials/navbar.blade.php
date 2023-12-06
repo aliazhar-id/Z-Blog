@@ -8,10 +8,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ route('home') }}" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ Request::is('posts*') ? 'active' : '' }}" href="{{ route('blogs') }}">Blog</a>
+          <a class="nav-link {{ Request::is('/') || (isset($isHome) ?: false) ? 'active' : '' }}"
+            href="{{ route('home') }}" href="#">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link {{ Request::is('trends') ? 'active' : '' }}" href="{{ route('trends') }}">Trends</a>

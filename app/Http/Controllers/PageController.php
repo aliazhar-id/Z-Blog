@@ -11,12 +11,7 @@ class PageController extends Controller
 
   public function home()
   {
-    return view('blog.page.home', ['title' => 'Home']);
-  }
-
-  public function blog()
-  {
-    return view('blog.page.posts', [
+    return view('blog.page.home', [
       'title' => 'Post',
       'posts' => Post::latest()->filter(request(['search', 'body']))->paginate(12)->withQueryString(),
       'categories' => Category::all()
@@ -43,6 +38,7 @@ class PageController extends Controller
 
     return view('blog.page.post', [
       'title' => 'Post',
+      'isHome' => true,
       'post' => $post
     ]);
   }

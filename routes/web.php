@@ -20,10 +20,9 @@ use App\Http\Controllers\UserController;
 
 // MAIN
 Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/posts', [PageController::class, 'blog'])->name('blogs');
-Route::get('/posts/{post}', [PageController::class, 'read']);
+Route::get('/{post}/read', [PageController::class, 'read']);
 Route::get('/trends', [PageController::class, 'trends'])->name('trends');
+Route::get('/about', [PageController::class, 'about'])->name('about');
 
 // LOGIN
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
