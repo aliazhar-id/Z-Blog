@@ -56,7 +56,7 @@
                 src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : '/assets/guest.jpeg' }}">
               <div class="profile-image-group position-absolute text-center pt-1">
                 <input class="d-none" type="file" id="profile-image-input" name="image" />
-                <label for="profile-image-input">
+                <label for="profile-image-input" style="width:100%">
                   <i class="fas fa-2x text-gray-300 fa-camera"></i>
                 </label>
               </div>

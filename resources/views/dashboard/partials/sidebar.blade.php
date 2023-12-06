@@ -25,7 +25,7 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    Post
+    MAIN
   </div>
 
   <!-- Nav Item - My Post -->
@@ -44,7 +44,7 @@
 
   <!-- Heading -->
   <div class="sidebar-heading">
-    Settings
+    SETTINGS
   </div>
 
   <!-- Nav Item - Profile -->
