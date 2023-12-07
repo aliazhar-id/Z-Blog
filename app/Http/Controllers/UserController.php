@@ -62,9 +62,9 @@ class UserController extends Controller
     $isProfileUpdated = false;
 
     $rules = [
-      'password' => 'required|max:50|current_password',
-      'new_password' => 'nullable|min:6|max:50|confirmed',
-      'new_password_confirmation' => 'max:50',
+      'password' => 'required|max:255|current_password',
+      'new_password' => 'nullable|min:6|max:255|confirmed',
+      'new_password_confirmation' => 'max:255',
     ];
 
     if ($request->name != $user->name) {
@@ -83,7 +83,7 @@ class UserController extends Controller
     }
 
     if ($request->file('image')) {
-      $rules['image'] = 'image|file|max:512';
+      $rules['image'] = 'image|file|max:2048';
       $isProfileUpdated = true;
     }
 
