@@ -51,7 +51,7 @@ class PostController extends Controller
         Rule::unique('posts')->where(fn ($query) => $query->where('title', request()->title)->where('id_user', auth()->user()->id_user))
       ],
       'id_category' => 'required',
-      'image' => 'image|file|max:512',
+      'image' => 'image|file|max:2048',
       'body' => 'required'
     ], $customError);
 
@@ -127,7 +127,7 @@ class PostController extends Controller
     }
 
     if ($request->file('image')) {
-      $rules['image'] = 'image|file|max:512';
+      $rules['image'] = 'image|file|max:2048';
       $isProfileUpdated = true;
     }
 
