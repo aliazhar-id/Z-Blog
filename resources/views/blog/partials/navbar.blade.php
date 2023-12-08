@@ -15,7 +15,7 @@
           <a class="nav-link {{ Request::is('trends') ? 'active' : '' }}" href="{{ route('trends') }}">Trends</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('posts*') ? 'about' : '' }}" href="{{ route('about') }}">About</a>
+          <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
         </li>
       </ul>
 
