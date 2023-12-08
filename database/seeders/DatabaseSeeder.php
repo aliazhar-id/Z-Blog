@@ -53,8 +53,58 @@ class DatabaseSeeder extends Seeder
     ]);
 
     Category::create([
-      'name' => 'Otomotif',
-      'slug' => 'otomotif'
+      'name' => 'Otomotive',
+      'slug' => 'otomotive'
+    ]);
+
+    Category::create([
+      'name' => 'Web Development',
+      'slug' => 'web-development'
+    ]);
+
+    Category::create([
+      'name' => 'Mobile App Development',
+      'slug' => 'mobile-app-development'
+    ]);
+
+    Category::create([
+      'name' => 'Design Inspiration',
+      'slug' => 'design-inspiration'
+    ]);
+
+    Category::create([
+      'name' => 'Productivity Tools',
+      'slug' => 'productivity-tools'
+    ]);
+
+    Category::create([
+      'name' => 'Data Science',
+      'slug' => 'data-science'
+    ]);
+
+    Category::create([
+      'name' => 'Machine Learning',
+      'slug' => 'machine-learning'
+    ]);
+
+    Category::create([
+      'name' => 'Gaming',
+      'slug' => 'gaming'
+    ]);
+
+    Category::create([
+      'name' => 'Health and Fitness',
+      'slug' => 'health-and-fitness'
+    ]);
+
+    Category::create([
+      'name' => 'Travel',
+      'slug' => 'travel'
+    ]);
+
+    Category::create([
+      'name' => 'Food and Cooking',
+      'slug' => 'food-and-cooking'
     ]);
 
     Post::factory(100)->create();
