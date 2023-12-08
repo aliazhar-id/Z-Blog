@@ -94,7 +94,7 @@
     (function() {
       var d = document,
         s = d.createElement('script');
-      s.src = 'https://z-blog-2.disqus.com/embed.js';
+      s.src = 'https://z-blog-3.disqus.com/embed.js';
       s.setAttribute('data-timestamp', +new Date());
       (d.head || d.body).appendChild(s);
     })();
