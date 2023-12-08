@@ -35,8 +35,14 @@
                 <a class="dropdown-item" href="{{ route('dashboard') }}"><i class="bi bi-card-list"></i> Dashboard</a>
               </li>
               <li>
+                <a class="dropdown-item" href="{{ route('posts.create') }}"><i class="bi bi-file-earmark-plus"></i>
+                  Create Post
+                </a>
+              </li>
+              <li>
                 <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="bi bi-person-gear"></i></i>
-                  Account</a>
+                  Account
+                </a>
               </li>
               <li>
                 <hr class="dropdown-divider">
