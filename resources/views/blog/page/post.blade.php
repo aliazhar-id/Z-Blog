@@ -39,7 +39,9 @@
 
         <article class="my-3 fs-5">{!! $post->body !!}</article>
 
-        <a href="{{ route('home') }}" class="d-block mt-3">Back to Home</a>
+        <a href="{{ route('home') }}" class="d-block mt-3 mb-5">Back to Home</a>
+
+        <div id="disqus_thread"></div>
       </div>
     </div>
 
@@ -80,4 +82,23 @@
       document.querySelector('#deleteForm').setAttribute('action', `/dashboard/posts/${post}`);
     });
   </script>
+
+  <script>
+    var disqus_config = function() {
+      this.page.url = "{{ $canonicalURL }}";
+
+      this.page.identifier =
+        {{ $post->id_post }};
+    };
+
+    (function() {
+      var d = document,
+        s = d.createElement('script');
+      s.src = 'https://z-blog-2.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+      Disqus.</a></noscript>
 @endsection

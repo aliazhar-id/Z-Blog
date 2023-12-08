@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Cookie;
 
 class PageController extends Controller
@@ -42,7 +43,8 @@ class PageController extends Controller
     return view('blog.page.post', [
       'title' => 'Post',
       'isHome' => true,
-      'post' => $post
+      'post' => $post,
+      'canonicalURL' => URL::current()
     ]);
   }
 
