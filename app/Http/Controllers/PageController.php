@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class PageController extends Controller
 {
@@ -34,7 +34,10 @@ class PageController extends Controller
 
   public function read(Post $post)
   {
-    Post::withoutTimestamps(fn () => $post->increment('click'));
+    if (!Cookie::has("$post->id_post")) {
+      Post::withoutTimestamps(fn () => $post->increment('click'));
+      Cookie::queue(Cookie::make("$post->id_post", '1', 1));
+    }
 
     return view('blog.page.post', [
       'title' => 'Post',
