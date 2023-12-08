@@ -59,6 +59,7 @@
             <form method="POST" id='deleteForm'>
               @method('DELETE')
               @csrf
+              <input type="hidden" value="1" name="isPost">
               <button type="submit" class="btn btn-danger">
                 <i class="bi bi-trash3"></i> DELETE
               </button>

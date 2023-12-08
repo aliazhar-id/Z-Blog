@@ -172,6 +172,11 @@ class PostController extends Controller
     }
 
     Post::destroy($post->id_post);
-    return redirect('/dashboard/posts')->with('success', 'Your post has been deleted successfully.');
+
+    if (request()->isPost) {
+      return redirect()->route('home')->with('success', 'Your post has been deleted successfully.');;
+    }
+
+    return back()->with('success', 'Your post has been deleted successfully.');
   }
 }
