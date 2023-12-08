@@ -13,7 +13,7 @@ class PageController extends Controller
   public function home()
   {
     return view('blog.page.home', [
-      'title' => 'Post',
+      'title' => 'Home',
       'posts' => Post::latest()->filter(request(['search', 'body']))->paginate(12)->withQueryString(),
       'categories' => Category::all()
     ]);
@@ -22,7 +22,7 @@ class PageController extends Controller
   public function trends()
   {
     return view('blog.page.trends', [
-      'title' => 'Post',
+      'title' => 'Trends',
       'posts' => Post::where('click', '>', 0)->orderByDesc('click')->orderByDesc('created_at')->paginate(12)->withQueryString(),
       'categories' => Category::all()
     ]);
