@@ -18,6 +18,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
+// NIM   : 10121189
+// Nama  : Muhammad Izham Ali Azhar
+// Kelas : IF5
+
 // MAIN
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/{post}/read', [PageController::class, 'read']);

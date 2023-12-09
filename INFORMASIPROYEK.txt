@@ -1,0 +1,26 @@
+NIM: 10121189
+Nama: Muhammad Izham Ali Azhar
+Kelas: IF-5/V
+
+Link Project: https://github.com/aliazhar-id/Z-Blog
+Link Website: https://blog.aliazhar.my.id
+
+Versi Laravel: 10
+
+################################################
+
+# Konfigurasi & Informasi:
+
+1. php.ini
+ extension=gd
+
+2. file .env; atau bisa langsung menggunakan .env.example
+ FILESYSTEM_DISK = "public"
+
+2. command sebelum dijalankan
+ php artisan storage:link
+
+3. command opsional untuk post dan user dummy
+ php artisan migrate:fresh --seed
+ *semua user passwordnya "123" 
+ 
