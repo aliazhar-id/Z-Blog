@@ -1,5 +1,24 @@
 @extends('dashboard.layouts.main')
 
+@section('custom-head')
+  <link href="https://cdn.datatables.net/v/bs4/dt-1.13.8/datatables.min.css" rel="stylesheet">
+
+  <style>
+    table.dataTable thead>tr>th {
+      padding-left: 30px !important;
+      padding-right: initial !important;
+    }
+
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting::before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_desc:after {
+      left: 8px !important;
+      right: auto !important;
+    }
+  </style>
+@endsection
+
 @section('content')
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">My Post</h1>
@@ -42,15 +61,15 @@
   </div>
 
   @if ($posts->count())
-    <div class="table-responsive col-lg-12">
-      <table class="table table-striped table-sm">
+    <div class="table-responsive col-lg-12 mt-4">
+      <table class="table table-striped table-sm" id="dataTable">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">No.</th>
             <th scope="col">Title</th>
             <th scope="col">Category</th>
             <th scope="col">Click</th>
-            <th scope="col">Action</th>
+            <th scope="col" data-orderable="false">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -72,7 +91,6 @@
           @endforeach
         </tbody>
       </table>
-      <div class="d-flex justify-content-center mt-4">{{ $posts->links() }}</div>
     </div>
 
     <!-- Delete Post Modal-->
@@ -112,5 +130,14 @@
       const modal = $(this);
       modal.find('form').attr('action', `/dashboard/posts/${post}`);
     })
+  </script>
+
+  <script src="https://cdn.datatables.net/v/bs4/dt-1.13.8/datatables.min.js"></script>
+
+  <script>
+    let table = new DataTable('#dataTable', {
+      info: false,
+      searching: false,
+    });
   </script>
 @endsection
