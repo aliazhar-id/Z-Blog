@@ -41,6 +41,8 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="/assets/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
+
+  @yield('custom-head')
 </head>
 
 @yield('body')
