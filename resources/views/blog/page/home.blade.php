@@ -25,7 +25,7 @@
       <!-- Featured blog post-->
       @if ($posts->count())
         <div class="card mb-4">
-          <a href="{{ route('home') . '/' . $posts[0]->slug . '/read' }}"><img height="400" class="card-img-top"
+          <a href="{{ route('read', $posts[0]->slug) }}"><img height="400" class="card-img-top"
               src="{{ $posts[0]->image ? asset('storage/' . $posts[0]->image) : '/assets/default-banner.jpg' }}"
               alt="..." fetchpriority="high" /></a>
           <div class="card-body">
@@ -47,7 +47,7 @@
             </div>
             <h2 class="card-title">{{ $posts[0]->title }}</h2>
             <p class="card-text">{!! $posts[0]->excerpt !!}</p>
-            <a class="btn btn-primary" href="{{ route('home') . '/' . $posts[0]->slug . '/read' }}">Read more</a>
+            <a class="btn btn-primary" href="{{ route('read', $posts[0]->slug) }}">Read more</a>
           </div>
         </div>
       @else
@@ -62,7 +62,7 @@
           <div class="col-lg-4">
             <!-- Blog post-->
             <div class="card mb-4">
-              <a href="{{ route('home') . '/' . $post->slug . '/read' }}"><img class="card-img-top"
+              <a href="{{ route('read', $post->slug) }}"><img class="card-img-top"
                   src="{{ $post->image ? asset('storage/' . $post->image) : '/assets/default-banner.jpg' }}"
                   alt="..." /></a>
               <div class="card-body">
@@ -84,7 +84,7 @@
                 </div>
                 <h2 class="card-title h4">{{ $post->title }}</h2>
                 <p class="card-text">{!! $post->excerpt !!}</p>
-                <a class="btn btn-primary" href="{{ route('home') . '/' . $post->slug . '/read' }}">Read more</a>
+                <a class="btn btn-primary" href="{{ route('read', $post->slug) }}">Read more</a>
               </div>
             </div>
           </div>

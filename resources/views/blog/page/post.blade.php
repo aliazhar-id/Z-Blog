@@ -27,7 +27,7 @@
         </div>
 
         @if (auth()->user()?->id_user === $post->id_user)
-          <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning">
+          <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-warning">
             <i class="bi bi-pencil-square"></i> Edit
           </a>
 
@@ -78,8 +78,8 @@
     const deletePostModal = document.querySelector('#deletePostModal');
 
     deletePostModal.addEventListener('shown.bs.modal', function(e) {
-      const post = e.relatedTarget.dataset.post;
-      document.querySelector('#deleteForm').setAttribute('action', `/dashboard/posts/${post}`);
+      const actionPath = "{{ route('posts.destroy', '') }}/" + e.relatedTarget.dataset.post;
+      document.querySelector('#deleteForm').setAttribute('action', actionPath);
     });
   </script>
 
@@ -99,6 +99,11 @@
       (d.head || d.body).appendChild(s);
     })();
   </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-      Disqus.</a></noscript>
+
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript">
+      comments powered by Disqus.
+    </a>
+  </noscript>
 @endsection

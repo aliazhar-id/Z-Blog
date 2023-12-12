@@ -17,7 +17,7 @@
 
         <div class="card-body">
 
-          <form action="/dashboard/posts/{{ $post->slug }}" method="POST" autocomplete="off"
+          <form action="{{ route('posts.update', $post->slug) }}" method="POST" autocomplete="off"
             enctype="multipart/form-data">
             @method('PATCH')
             @csrf

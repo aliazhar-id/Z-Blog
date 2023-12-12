@@ -16,7 +16,7 @@
     <div class="col-lg-9 mx-auto">
       @if ($posts->count())
         <div class="card mb-4">
-          <a href="{{ route('home') . '/' . $posts[0]->slug . '/read' }}">
+          <a href="{{ route('read', $posts[0]->slug) }}">
             <img class="card-img-top" height="400"
               src="{{ $posts[0]->image ? asset('storage/' . $posts[0]->image) : '/assets/default-banner.jpg' }}"
               alt="..." fetchpriority="high" /></a>
@@ -39,7 +39,7 @@
             </div>
             <h2 class="card-title">{{ $posts[0]->title }}</h2>
             <p class="card-text">{!! $posts[0]->excerpt !!}</p>
-            <a class="btn btn-primary" href="{{ route('home') . '/' . $posts[0]->slug . '/read' }}">Read more</a>
+            <a class="btn btn-primary" href="{{ route('read', $posts[0]->slug) }}">Read more</a>
           </div>
         </div>
       @else
@@ -50,7 +50,7 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <a href="{{ route('home') . '/' . $post->slug . '/read' }}">
+              <a href="{{ route('read', $post->slug) }}">
                 <img class="card-img-top"
                   src="{{ $post->image ? asset('storage/' . $post->image) : '/assets/default-banner.jpg' }}"
                   style="height: 100%;" alt="...">
@@ -77,7 +77,7 @@
                     </div>
                   </div>
                 </div>
-                <a class="btn btn-primary mt-2" href="{{ route('home') . '/' . $post->slug . '/read' }}">
+                <a class="btn btn-primary mt-2" href="{{ route('read', $post->slug) }}">
                   Read more
                 </a>
               </div>

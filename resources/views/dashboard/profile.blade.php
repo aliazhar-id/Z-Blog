@@ -43,7 +43,8 @@
     </div>
   @endif
 
-  <form action="/profile/{{ auth()->user()->username }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+  <form action="{{ route('profile.update', auth()->user()->username) }}" method="POST" autocomplete="off"
+    enctype="multipart/form-data">
     @csrf
     @method('PATCH')
 

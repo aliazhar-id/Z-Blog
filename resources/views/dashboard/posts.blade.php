@@ -22,7 +22,8 @@
 @section('content')
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">My Post</h1>
-    <form action="/dashboard/posts"
+
+    <form action="{{ route('posts.index') }}"
       class="d-none d-sm-inline-block form-inline mr-auto ml-md-4 my-2 my-md-0 mw-100 navbar-search">
       @if (request('title'))
         <input type="hidden" name="title" value="{{ request('title') }}">
@@ -38,6 +39,7 @@
         </div>
       </div>
     </form>
+
   </div>
 
   @if (session('success'))
@@ -57,7 +59,7 @@
   @endif
 
   <div class="col-lg-12">
-    <a href="/dashboard/posts/create" class="btn btn-primary mb-3 mx-">Create new Post</a>
+    <a href="{{ route('posts.create') }}" class="btn btn-primary mb-3 mx-">Create new Post</a>
   </div>
 
   @if ($posts->count())
@@ -80,10 +82,12 @@
               <td>{{ $post->category->name }}</td>
               <td>{{ $post->click }}</td>
               <td>
-                <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-primary"><span
-                    data-feather="eye"></span></a>
-                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning"><span
-                    data-feather="edit"></span></a>
+                <a href="{{ route('posts.show', $post->slug) }}" class="badge bg-primary"><span
+                    data-feather="eye"></span>
+                </a>
+                <a href="{{ route('posts.edit', $post->slug) }}" class="badge bg-warning"><span
+                    data-feather="edit"></span>
+                </a>
                 <button class="badge bg-danger border-0 text-info" data-toggle="modal" data-target="#deletePostModal"
                   data-post="{{ $post->slug }}"><span data-feather="x-circle"></span></button>
               </td>
@@ -128,7 +132,8 @@
       const button = $(event.relatedTarget)
       const post = button.data('post');
       const modal = $(this);
-      modal.find('form').attr('action', `/dashboard/posts/${post}`);
+
+      modal.find('form').attr('action', `{{ route('posts.destroy', '') }}/${post}`);
     })
   </script>
 

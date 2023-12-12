@@ -57,8 +57,7 @@
           </li>
         @else
           <li class="nav-item">
-            <a href="{{ route('login') }}"
-              class="nav-link btn btn-secondary lh-base{{ Request::is('login') ? 'about' : '' }}">
+            <a href="{{ route('login') }}" class="nav-link btn btn-secondary lh-base">
               <i class="bi bi-box-arrow-in-right"></i> Log In
             </a>
           </li>

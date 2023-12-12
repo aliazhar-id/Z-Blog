@@ -7,7 +7,7 @@
       <img src="{{ $post->image ? asset('storage/' . $post->image) : '/assets/default-banner.jpg' }}" class="img-fluid mb-3"
         alt="{{ $post->category->name }}">
 
-      <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning"> <span data-feather="edit"></span> Edit</a>
+      <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-warning"> <span data-feather="edit"></span> Edit</a>
       <button class="btn btn-danger" data-toggle="modal" data-target="#deletePostModal"
         data-post="{{ $post->slug }}"><span data-feather="x-circle"></span> Delete
       </button>
@@ -29,6 +29,7 @@
         <div class="modal-body">Select "DELETE" below if you are ready to delete this post.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+
           <form method="POST" id='deleteForm'>
             @method('DELETE')
             @csrf
@@ -36,6 +37,7 @@
               <i class="far fa-trash-alt"></i> DELETE
             </button>
           </form>
+
         </div>
       </div>
     </div>
@@ -48,7 +50,8 @@
       const button = $(event.relatedTarget)
       const post = button.data('post');
       const modal = $(this);
-      modal.find('form').attr('action', `/dashboard/posts/${post}`);
+
+      modal.find('form').attr('action', `{{ route('posts.destroy', '') }}/${post}`);
     })
   </script>
 @endsection
