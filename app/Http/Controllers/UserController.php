@@ -16,7 +16,7 @@ class UserController extends Controller
    */
   public function index()
   {
-    return view('dashboard.profile', [
+    return view('dashboard.main.profile', [
       'title' => 'Profile',
       'posts' => Post::where('id_user', auth()->user()->id_user)->get()
     ]);

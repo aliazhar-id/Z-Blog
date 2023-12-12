@@ -17,7 +17,7 @@ class PostController extends Controller
    */
   public function index()
   {
-    return view('dashboard.posts', [
+    return view('dashboard.main.posts', [
       'title' => 'My Post',
       'posts' => Post::latest()->where('id_user', auth()->user()->id_user)->filter(request(['search']))->get()
     ]);
@@ -28,7 +28,7 @@ class PostController extends Controller
    */
   public function create()
   {
-    return view('dashboard.create', [
+    return view('dashboard.main.create', [
       'title' => 'Create',
       'categories' => Category::all()
     ]);
@@ -64,7 +64,7 @@ class PostController extends Controller
     }
 
     Post::create($validatedData);
-    return redirect('/dashboard/posts')->with('success', 'Your post has been successfully posted!');
+    return redirect()->route('posts.index')->with('success', 'Your post has been successfully posted!');
   }
 
   /**
@@ -72,7 +72,7 @@ class PostController extends Controller
    */
   public function show(Post $post)
   {
-    return view('dashboard.read', [
+    return view('dashboard.main.read', [
       'title' => 'Post',
       'post' => $post
     ]);
@@ -87,7 +87,7 @@ class PostController extends Controller
       return abort(403);
     }
 
-    return view('dashboard.edit', [
+    return view('dashboard.main.edit', [
       'title' => 'Edit',
       'post' => $post,
       'categories' => Category::all()
@@ -159,7 +159,7 @@ class PostController extends Controller
     }
 
     Post::where('id_post', $post->id_post)->update($validatedData);
-    return redirect('/dashboard/posts')->with('success', 'Your post has been updated successfully.');
+    return redirect()->route('posts.index')->with('success', 'Your post has been updated successfully.');
   }
 
   /**
