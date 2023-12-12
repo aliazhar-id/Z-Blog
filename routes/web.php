@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
@@ -38,4 +39,8 @@ Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard'
 Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
 Route::resource('/profile', UserController::class)->parameters(['profile' => 'user'])->only(['index', 'update'])->middleware('auth');
 
+// ADMIN
+Route::resource('/dashboard/admin/users', AdminUserController::class)->except('show')->middleware('admin');
+
+// ROUTES FALLBACK
 Route::fallback([PageController::class, 'home']);
