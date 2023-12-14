@@ -140,9 +140,22 @@
   <script src="https://cdn.datatables.net/v/bs4/dt-1.13.8/datatables.min.js"></script>
 
   <script>
-    let table = new DataTable('#dataTable', {
+    $('#dataTable').dataTable({
       info: false,
       searching: false,
+      preDrawCallback: function(settings) {
+        const api = new $.fn.dataTable.Api(settings);
+        const pagination = $(this)
+          .closest('.dataTables_wrapper')
+          .find('.dataTables_paginate');
+
+        const entriesCount = $(this)
+          .closest('.dataTables_wrapper')
+          .find('.dataTables_length');
+
+        pagination.toggle(api.page.info().pages > 1);
+        entriesCount.toggle(api.page.info().pages > 1);
+      }
     });
   </script>
 @endsection
