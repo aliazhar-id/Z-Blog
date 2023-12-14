@@ -21,7 +21,7 @@ use App\Http\Controllers\UserController;
 
 // MAIN
 Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/{post}/read', [PageController::class, 'read']);
+Route::get('/{post}/read', [PageController::class, 'read'])->name('read');
 Route::get('/trends', [PageController::class, 'trends'])->name('trends');
 Route::get('/about', [PageController::class, 'about'])->name('about');
 
@@ -40,7 +40,7 @@ Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
 Route::resource('/profile', UserController::class)->parameters(['profile' => 'user'])->only(['index', 'update'])->middleware('auth');
 
 // ADMIN
-Route::resource('/dashboard/admin/users', AdminUserController::class)->except('show')->middleware('admin');
+Route::resource('/dashboard/admin/users', AdminUserController::class)->middleware('admin');
 
 // ROUTES FALLBACK
 Route::fallback([PageController::class, 'home']);

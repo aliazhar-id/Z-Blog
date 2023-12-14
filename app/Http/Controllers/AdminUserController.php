@@ -15,6 +15,14 @@ class AdminUserController extends Controller
    */
   public function index()
   {
+    return view('dashboard.admin.users.index', [
+      'title' => 'Users',
+      'users' => User::whereNotIn('role', ['admin', 'owner'])
+        ->where('id_user', '!=', auth()->user()->id_user)
+        ->filter(request(['search']))
+        ->latest()
+        ->get()
+    ]);
   }
 
   /**

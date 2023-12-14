@@ -54,6 +54,20 @@
       <span>Profile</span></a>
   </li>
 
+  @can('admin')
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      ADMINISTRATOR
+    </div>
+
+    <!-- Nav Item - Users -->
+    <li class="nav-item {{ Request::is('dashboard/admin/users*') ? 'active' : '' }}">
+      <a class="nav-link" href="{{ route('users.index') }}">
+        <i class="fas fa-user"></i>
+        <span>Users</span></a>
+    </li>
+  @endcan
+
   <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 

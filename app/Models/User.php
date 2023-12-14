@@ -52,6 +52,16 @@ class User extends Authenticatable
     return $this->hasMany(Post::class, 'id_post');
   }
 
+  public function scopeFilter($query, array $filters)
+  {
+    $query->when($filters['search'] ?? false, function ($query, $search) {
+      return $query->where(function ($query) use ($search) {
+        $query->where('username', 'like', "%$search%")
+          ->orWhere('name', 'like', "%$search%");
+      });
+    });
+  }
+
   public function getRouteKeyName()
   {
     return 'username';
