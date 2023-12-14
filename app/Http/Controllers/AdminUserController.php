@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -52,7 +53,7 @@ class AdminUserController extends Controller
     return view('dashboard.admin.users.show', [
       'title' => 'User Info',
       'user' => $user,
-      'posts' => $user->posts(),
+      'posts' => Post::where('id_user', $user->id_user)->get(),
     ]);
   }
 
