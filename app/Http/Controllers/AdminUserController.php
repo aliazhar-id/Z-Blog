@@ -31,6 +31,9 @@ class AdminUserController extends Controller
    */
   public function create()
   {
+    return view('dashboard.admin.users.create', [
+      'title' => 'Create User'
+    ]);
   }
 
   /**
@@ -38,7 +41,36 @@ class AdminUserController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $validatedData = $request->validate([
+      'name' => 'required|min:3|max:100',
+      'username' => 'required|alpha_dash|unique:users|min:3|max:15',
+      'password' => 'required|min:6|max:255|confirmed',
+      'password_confirmation' => 'required|max:50',
+      'email' => 'required|email:dns|unique:users|max:30',
+      'image' => 'nullable|image|file|max:2048',
+    ]);
+
+    if ($request->file('image')) {
+      $image = Image::make($request->file('image'));
+      $ratio = 1 / 1;
+
+      if (intval($image->width() / $ratio > $image->height())) {
+        $image->fit(intval($image->height() * $ratio), $image->height());
+      } else {
+        $image->fit($image->width(), intval($image->width() / $ratio));
+      }
+
+      $filePath = 'profile-images/' . uniqid() . uniqid() . '.jpg';
+      $image->save(storage_path('app/public/' . $filePath));
+
+      $validatedData['image'] = $filePath;
+    }
+
+    $validatedData['password'] = Hash::make($validatedData['password']);
+    $validatedData['username'] = strtolower($validatedData['username']);
+
+    User::create($validatedData);
+    return redirect()->route('users.index')->with('success', 'New account added successfully');
   }
 
   /**
