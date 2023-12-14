@@ -62,7 +62,7 @@
 
   @if ($users->count())
     <div class="table-responsive col-lg-12 mt-4">
-      <table class="table table-striped table-sm" id="dataTable">
+      <table class="table table-striped table-sm border" id="dataTable">
         <thead>
           <tr>
             <th scope="col">No.</th>
