@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
 Route::resource('/profile', UserController::class)->parameters(['profile' => 'user'])->only(['index', 'update'])->middleware('auth');
 
 // ADMIN
-Route::resource('/dashboard/admin/users', AdminUserController::class)->middleware('admin');
+Route::resource('/dashboard/admin/users', AdminUserController::class, ['as' => 'admin'])->middleware('admin');
 
 // ROUTES FALLBACK
 Route::fallback([PageController::class, 'home']);

@@ -54,7 +54,7 @@
 
         <!-- Button -->
         <div class="col text-center mb-2">
-          <a href="{{ route('users.index') }}" class="btn btn-primary mt-3 ">Back</a>
+          <a href="{{ route('admin.users.index') }}" class="btn btn-primary mt-3 ">Back</a>
         </div>
       </div>
     </div>

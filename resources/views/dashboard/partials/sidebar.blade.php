@@ -30,14 +30,14 @@
 
   <!-- Nav Item - My Post -->
   <li class="nav-item {{ Request::is('dashboard/posts') ? 'active' : '' }}">
-    <a class="nav-link pb-2" href="/dashboard/posts">
+    <a class="nav-link pb-2" href="{{ route('posts.index') }}">
       <i class="far fa-file-alt"></i>
       <span>My Post</span></a>
   </li>
 
   <!-- Nav Item - Add Post -->
   <li class="nav-item {{ Request::is('dashboard/posts/create') ? 'active' : '' }}">
-    <a class="nav-link pt-0" href="/dashboard/posts/create">
+    <a class="nav-link pt-0" href="{{ route('posts.create') }}">
       <i class="far fa-file"></i>
       <span>Add Post</span></a>
   </li>
@@ -62,7 +62,7 @@
 
     <!-- Nav Item - Users -->
     <li class="nav-item {{ Request::is('dashboard/admin/users*') ? 'active' : '' }}">
-      <a class="nav-link" href="{{ route('users.index') }}">
+      <a class="nav-link" href="{{ route('admin.users.index') }}">
         <i class="fas fa-user"></i>
         <span>Users</span></a>
     </li>

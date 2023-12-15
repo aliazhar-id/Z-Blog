@@ -40,7 +40,7 @@
     </div>
   @endif
 
-  <form action="{{ route('users.update', $user->username) }}" method="POST" autocomplete="off"
+  <form action="{{ route('admin.users.update', $user->username) }}" method="POST" autocomplete="off"
     enctype="multipart/form-data">
     @csrf
     @method('PATCH')
