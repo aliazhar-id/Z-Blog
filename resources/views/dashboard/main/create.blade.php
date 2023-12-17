@@ -17,7 +17,7 @@
 
         <div class="card-body">
 
-          <form action="{{ route('posts.create') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+          <form action="{{ route('posts.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
             @csrf
             <div class="pl-lg-4">
               <div class="row">
