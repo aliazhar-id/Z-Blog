@@ -6,8 +6,6 @@
   $postRate = $totalClick ? min(100, floor(($totalClick / $postCount) * 0.0485 * 100)) : 0;
   $grade = 'No';
 
-  $role = $postCount ? 'Writer' : 'Member';
-
   if ($postCount) {
       if ($postRate >= 80) {
           $grade = 'A';
@@ -74,7 +72,7 @@
               <div class="col-lg-12">
                 <div class="text-center">
                   <h5 class="font-weight-bold">{{ auth()->user()->name }}</h5>
-                  <p>{{ $role }}</p>
+                  <p>{{ ucfirst(auth()->user()->role) }}</p>
                 </div>
               </div>
             </div>
