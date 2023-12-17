@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeletedUser;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -181,7 +182,7 @@ class AdminUserController extends Controller
 
     User::where('id_user', $user->id_user)->update($validatedData);
 
-    return redirect(route('users.edit', $validatedData['username'] ?? $user->username))->with('success', 'User updated successfully!');
+    return redirect(route('admin.users.edit', $validatedData['username'] ?? $user->username))->with('success', 'User updated successfully!');
   }
 
   /**
@@ -189,6 +190,21 @@ class AdminUserController extends Controller
    */
   public function destroy(User $user)
   {
-    //
+    if ($user->role !== 'member') {
+      abort(403);
+    }
+
+    if ($user->image) {
+      Storage::delete($user->image);
+      $user['image'] = null;
+    }
+
+    $userData = $user->toArray();
+    $userData['password'] = $user->password;
+
+    User::destroy($user->id_user);
+    DeletedUser::create($userData);
+
+    return back()->with('success', "@$user->username has been removed successfully.");
   }
 }

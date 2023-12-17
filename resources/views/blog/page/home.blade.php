@@ -33,11 +33,13 @@
             <div class="container d-flex mb-2 px-0 align-items-center">
               <div class="profile-pic me-1" style="height: 50px; width:50px">
                 <img
-                  src="{{ $posts[0]->author->image ? asset('storage/' . $posts[0]->author->image) : '/assets/guest.jpeg' }}"
+                  src="{{ isset($posts[0]->author->image) ? asset('storage/' . $posts[0]->author->image) : '/assets/guest.jpeg' }}"
                   alt="Profile Picture">
               </div>
               <div>
-                <small class="text-muted text-break">{{ $posts[0]->author->name }}</small class="text-muted">
+                <small class="text-muted text-break">
+                  {{ $posts[0]->author->name ?? 'DeletedAuthor-' . $posts[0]->id_user }}
+                </small>
                 <div class="text-muted small text-break d-block">{{ $posts[0]->category->name }}</div class="text-muted">
                 <div class="small text-muted">
                   {{ $posts[0]->created_at->diffForHumans() . ' [' }}
@@ -70,11 +72,13 @@
                 <div class="container d-flex mb-2 px-0 align-items-center">
                   <div class="profile-pic me-1" style="height: 50px; width:50px">
                     <img
-                      src="{{ $post->author->image ? asset('storage/' . $post->author->image) : '/assets/guest.jpeg' }}"
+                      src="{{ isset($post->author->image) ? asset('storage/' . $post->author->image) : '/assets/guest.jpeg' }}"
                       alt="Profile Picture">
                   </div>
                   <div>
-                    <small class="text-muted text-break">{{ $post->author->name }}</small class="text-muted">
+                    <small class="text-muted text-break">
+                      {{ $post->author->name ?? "DeletedAuthor-$post->id_user" }}
+                    </small>
                     <div class="text-muted small text-break d-block">{{ $post->category->name }}</div class="text-muted">
                     <div class="small text-muted">
                       {{ $post->created_at->diffForHumans() . ' [' }}
