@@ -79,7 +79,7 @@ class AdminUserController extends Controller
    */
   public function show(User $user)
   {
-    if ($user->role !== 'member') {
+    if (!in_array($user->role, ['admin', 'owner'])) {
       abort(403);
     }
 
@@ -99,7 +99,7 @@ class AdminUserController extends Controller
       return redirect(route('profile.index'));
     }
 
-    if ($user->role !== 'member') {
+    if (!in_array($user->role, ['admin', 'owner'])) {
       abort(403);
     }
 
