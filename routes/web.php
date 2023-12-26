@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\AdminUserController;
 
 /*
@@ -36,7 +36,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('actionR
 
 // DASHBOARD
 Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-Route::resource('/dashboard/posts', PostController::class)->middleware('auth');
+Route::resource('/dashboard/posts', UserPostController::class)->middleware('auth');
 Route::resource('/profile', UserController::class)->parameters(['profile' => 'user'])->only(['index', 'update'])->middleware('auth');
 
 // ADMIN

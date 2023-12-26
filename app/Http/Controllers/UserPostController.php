@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
-class PostController extends Controller
+class UserPostController extends Controller
 {
   /**
    * Display a listing of the resource.
