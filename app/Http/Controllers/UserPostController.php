@@ -167,6 +167,10 @@ class UserPostController extends Controller
 
     Post::destroy($post->id_post);
 
+    if ($post->image) {
+      Storage::delete($post->image);
+    }
+
     if (request()->isPost) {
       return redirect()->route('home')->with('success', 'Your post has been deleted successfully.');;
     }
