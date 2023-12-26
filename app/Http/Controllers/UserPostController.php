@@ -83,9 +83,7 @@ class UserPostController extends Controller
    */
   public function edit(Post $post)
   {
-    if (auth()->user()->id_user != $post->id_user) {
-      return abort(403);
-    }
+    $this->authorize('author', $post);
 
     return view('dashboard.main.edit', [
       'title' => 'Edit',
@@ -99,9 +97,7 @@ class UserPostController extends Controller
    */
   public function update(Request $request, Post $post)
   {
-    if (auth()->user()->id_user != $post->id_user) {
-      return abort(403);
-    }
+    $this->authorize('author', $post);
 
     $customError = [
       'title.unique' => "You already have post with this title!"
@@ -167,9 +163,7 @@ class UserPostController extends Controller
    */
   public function destroy(Post $post)
   {
-    if (auth()->user()->id_user != $post->id_user) {
-      return abort(403);
-    }
+    $this->authorize('author', $post);
 
     Post::destroy($post->id_post);
 
